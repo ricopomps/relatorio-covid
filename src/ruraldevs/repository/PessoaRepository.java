@@ -4,7 +4,7 @@ import ruraldevs.beans.Pessoa;
 
 public class PessoaRepository extends GenericRepository<Pessoa> {
 
-	PessoaRepository() {
+	public PessoaRepository() {
 		super();
 	}
 

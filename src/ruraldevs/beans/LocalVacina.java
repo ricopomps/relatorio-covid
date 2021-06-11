@@ -1,30 +1,33 @@
-package Beans;
+package ruraldevs.beans;
 
 public class LocalVacina {
-	
+
 	private String postoVacinacao;
-	private EstadosEnum EstadoVacinacao;
-	
+	private Endereco enderecoVacina;
+
 	public LocalVacina() {
-		
+
 	}
 
-	public LocalVacina(String postoVacinacao, EstadosEnum estadoVacinacao) {
+	public LocalVacina(String postoVacinacao, Endereco enderecoVacina) {
 		this.postoVacinacao = postoVacinacao;
-		EstadoVacinacao = estadoVacinacao;
+		this.enderecoVacina = enderecoVacina;
 	}
-	
+
 	public String getPostoVacinacao() {
 		return postoVacinacao;
 	}
+
 	public void setPostoVacinacao(String postoVacinacao) {
 		this.postoVacinacao = postoVacinacao;
 	}
-	public EstadosEnum getEstadoVacinacao() {
-		return EstadoVacinacao;
+
+	public Endereco getEnderecoVacina() {
+		return enderecoVacina;
 	}
-	public void setEstadoVacinacao(EstadosEnum estadoVacinacao) {
-		EstadoVacinacao = estadoVacinacao;
+
+	public void setEnderecoVacina(Endereco enderecoVacina) {
+		this.enderecoVacina = enderecoVacina;
 	}
 
 }

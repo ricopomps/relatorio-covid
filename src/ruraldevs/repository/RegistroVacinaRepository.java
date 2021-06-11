@@ -4,7 +4,7 @@ import ruraldevs.beans.RegistroVacina;
 
 public class RegistroVacinaRepository extends GenericRepository<RegistroVacina> {
 
-	RegistroVacinaRepository() {
+	public RegistroVacinaRepository() {
 		super();
 	}
 }

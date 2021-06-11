@@ -6,11 +6,21 @@ public class RegistroVacina {
 	private Pessoa pessoa;
 	private Vacina vacina;
 	private LocalDate dataDaVacina;
+	private LocalVacina localVacina;
 
-	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDate dataDaVacina) {
+	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDate dataDaVacina, LocalVacina localVacina) {
 		this.pessoa = pessoa;
 		this.vacina = vacina;
 		this.dataDaVacina = dataDaVacina;
+		this.localVacina = localVacina;
+	}
+
+	public LocalVacina getLocalVacina() {
+		return localVacina;
+	}
+
+	public void setLocalVacina(LocalVacina localVacina) {
+		this.localVacina = localVacina;
 	}
 
 	public Pessoa getPessoa() {
