@@ -1,6 +1,7 @@
 package ruraldevs.beans;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Pessoa {
 
@@ -10,17 +11,38 @@ public class Pessoa {
 	private String senha;
 
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String senha) {
-		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 	}
 
-	public Pessoa() {
-		super();
+	public Pessoa() {}
+
+	public int calcularIdade() {
+		int idade = (int) dataNascimento.until(LocalDate.now(), ChronoUnit.YEARS);
+		return idade;
 	}
 
+	// EQUALS
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		return true;
+	}
+
+	// GETTERS E SETTERS
 	public String getNome() {
 		return nome;
 	}
@@ -51,21 +73,5 @@ public class Pessoa {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
-			return false;
-		return true;
 	}
 }
