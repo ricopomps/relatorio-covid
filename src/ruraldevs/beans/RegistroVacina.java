@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class RegistroVacina {
 	private Pessoa pessoa;
 	private Vacina vacina;
+	private int dose;
 	private LocalDate dataDaVacina;
 	private LocalVacina localVacina;
 
@@ -15,6 +16,7 @@ public class RegistroVacina {
 		this.localVacina = localVacina;
 	}
 
+	// GETTERS E SETTERS
 	public LocalVacina getLocalVacina() {
 		return localVacina;
 	}
@@ -45,6 +47,14 @@ public class RegistroVacina {
 
 	public void setDataDaVacina(LocalDate dataDaVacina) {
 		this.dataDaVacina = dataDaVacina;
+	}
+
+	public int getDose() {
+		return dose;
+	}
+
+	public void setDose(int dose) {
+		this.dose = dose;
 	}
 
 }

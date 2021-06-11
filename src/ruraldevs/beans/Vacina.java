@@ -4,15 +4,12 @@ public class Vacina {
 
 	private String lote;
 	private VacinasEnum nomeVacina;
-	private int dose;
 
-	public Vacina() {
-	}
+	public Vacina() {}
 
-	public Vacina(String lote, VacinasEnum nomeVacina, int dose) {
+	public Vacina(String lote, VacinasEnum nomeVacina) {
 		this.lote = lote;
 		this.nomeVacina = nomeVacina;
-		this.dose = dose;
 	}
 
 	public String getLote() {
@@ -29,14 +26,6 @@ public class Vacina {
 
 	public void setNomeVacina(VacinasEnum nomeVacina) {
 		this.nomeVacina = nomeVacina;
-	}
-
-	public int getDose() {
-		return dose;
-	}
-
-	public void setDose(int dose) {
-		this.dose = dose;
 	}
 
 }
