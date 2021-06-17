@@ -9,7 +9,7 @@ public class VacinaService {
 	private VacinaRepository repositorio;
 
 	public VacinaService() {
-		this.repositorio = new VacinaRepository();
+		this.repositorio = VacinaRepository.getInstance();
 	}
 
 	public void addVacina(Vacina vacina) {

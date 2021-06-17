@@ -9,7 +9,7 @@ public class PessoaService {
 	private PessoaRepository repositorio;
 
 	public PessoaService() {
-		this.repositorio = new PessoaRepository();
+		this.repositorio = PessoaRepository.getInstance();
 	}
 
 	public void addPessoa(Pessoa pessoa) {
