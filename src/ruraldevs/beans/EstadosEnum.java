@@ -10,16 +10,10 @@ public enum EstadosEnum {
         setNomeEstado(nomeEstado);
     }
 
-    /**
-     * @return String return the nomeEstado
-     */
     public String getNomeEstado() {
         return nomeEstado;
     }
 
-    /**
-     * @param nomeEstado the nomeEstado to set
-     */
     public void setNomeEstado(String nomeEstado) {
         this.nomeEstado = nomeEstado;
     }
