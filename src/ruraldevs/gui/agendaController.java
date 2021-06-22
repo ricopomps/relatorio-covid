@@ -27,15 +27,9 @@ public class agendaController {
 		
 	 }
 
-	
-	public void draggrupo(ActionEvent event) {
-		
+
 		  
-				 
-		 } 
-		  
-	
-	    
+    
 		
 			
 }
