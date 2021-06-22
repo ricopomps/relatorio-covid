@@ -27,5 +27,10 @@ public class PessoaService {
 	public void updatePessoa(Pessoa pessoa) {
 		this.repositorio.updateDado(pessoa);
 	}
+	public void salvarService() {
+		PessoaRepository.getInstance().salvarArquivo();
+	}
+
+		
 
 }
