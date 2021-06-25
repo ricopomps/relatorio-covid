@@ -1,35 +1,16 @@
-package gui;
+package ruraldevs.gui;
 
-
-
-
-
-
-import Beans.GrupoEnum;
 import javafx.collections.FXCollections;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import ruraldevs.beans.GrupoEnum;
 
 public class agendaController {
-	
-	
-	
 	@FXML
-	ChoiceBox<GrupoEnum> gruposelect= new ChoiceBox<>();
-	
+	ChoiceBox<GrupoEnum> gruposelect = new ChoiceBox<>();
+
 	@FXML
-	 private void initialize() {
-		
-		  gruposelect.setItems(FXCollections.observableArrayList( GrupoEnum.values()));
-		
-		
-	 }
-
-
-		  
-    
-		
-			
+	private void initialize() {
+		gruposelect.setItems(FXCollections.observableArrayList(GrupoEnum.values()));
+	}
 }
