@@ -3,7 +3,8 @@ package ruraldevs.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericRepository<T> {
+public abstract class GenericRepository<T>  implements Serializable{
+	private static final long serialVersionUID = 5771985947054727592L;
 	private List<T> dados;
 
 	GenericRepository() {
