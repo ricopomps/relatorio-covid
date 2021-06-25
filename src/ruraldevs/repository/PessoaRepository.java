@@ -19,7 +19,7 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 		return instance;
 	}
 
-}
+
 
 public void addPessoa(Pessoa pessoa) {
 		this.addDado(pessoa);
