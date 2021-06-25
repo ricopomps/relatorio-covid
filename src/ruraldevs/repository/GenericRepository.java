@@ -1,9 +1,10 @@
 package ruraldevs.repository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericRepository<T>  implements Serializable{
+public abstract class GenericRepository<T> implements Serializable {
 	private static final long serialVersionUID = 5771985947054727592L;
 	private List<T> dados;
 
@@ -20,13 +21,13 @@ public abstract class GenericRepository<T>  implements Serializable{
 			this.dados.add(dado);
 		}
 	}
-	
+
 	public void deleteDado(T dado) {
 		if (this.dados.contains(dado)) {
 			this.dados.remove(dado);
 		}
 	}
-	
+
 	public void updateDado(T dado) {
 		if (this.dados.contains(dado)) {
 			this.dados.set(this.dados.indexOf(dado), dado);
