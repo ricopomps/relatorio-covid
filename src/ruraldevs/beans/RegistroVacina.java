@@ -8,12 +8,14 @@ public class RegistroVacina {
 	private int dose;
 	private LocalDate dataDaVacina;
 	private LocalVacina localVacina;
+	private GrupoEnum grupo;
 
-	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDate dataDaVacina, LocalVacina localVacina) {
+	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDate dataDaVacina, LocalVacina localVacina, GrupoEnum grupo) {
 		this.pessoa = pessoa;
 		this.vacina = vacina;
 		this.dataDaVacina = dataDaVacina;
 		this.localVacina = localVacina;
+		this.grupo = grupo;
 	}
 
 	// GETTERS E SETTERS
@@ -55,6 +57,14 @@ public class RegistroVacina {
 
 	public void setDose(int dose) {
 		this.dose = dose;
+	}
+
+	public GrupoEnum getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(GrupoEnum grupo) {
+		this.grupo = grupo;
 	}
 
 }
