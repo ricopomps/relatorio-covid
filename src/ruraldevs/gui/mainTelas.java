@@ -30,7 +30,7 @@ public class mainTelas extends Application {
 		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/agendasample.fxml"));
 		agendaScene = new Scene(fxmlAgenda);
 
-		Parent fxmlAfterLogin = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/aloginsample.fxml"));
+		Parent fxmlAfterLogin = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/statussample.fxml"));
 		aLoginScene = new Scene(fxmlAfterLogin);
 
 		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/telaDados.fxml"));
