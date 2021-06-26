@@ -15,11 +15,11 @@
          <children>
             <ImageView fitHeight="650.0" fitWidth="1350.0" layoutX="2.0">
                <image>
-                  <Image url="@../../../../Downloads/TEST1.png" />
+                  <Image url="@login.png" />
                </image>
             </ImageView>
             <Hyperlink fx:id="bttncadas" layoutX="1258.0" layoutY="36.0" onAction="#bttncadaspressed" text="Cadastrar" textFill="WHITE" />
-            <Button fx:id="bttnlogin" layoutX="1141.0" layoutY="365.0" mnemonicParsing="false" onAction="#bttnlognpressed" prefHeight="29.0" prefWidth="60.0" text="Login"/>
+            <Button fx:id="bttnlogin" layoutX="1141.0" layoutY="365.0" mnemonicParsing="false" onAction="#bttnlognpressed" prefHeight="29.0" prefWidth="60.0" text="Login" />
             <TextField fx:id="login" layoutX="1100.0" layoutY="251.0" prefHeight="22.0" prefWidth="143.0" promptText="Username" />
             <PasswordField fx:id="senha" layoutX="1100.0" layoutY="300.0" prefHeight="25.0" prefWidth="143.0" promptText="Password" />
             <Button fx:id="bttndados" layoutX="272.0" layoutY="474.0" mnemonicParsing="false" onAction="#bttndadospressed" text="ESTATISTICAS" />
