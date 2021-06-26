@@ -17,6 +17,7 @@ public class RegistroVacina {
 		this.localVacina = localVacina;
 		this.grupo = grupo;
 	}
+
 	public RegistroVacina() {}
 
 	// GETTERS E SETTERS
@@ -67,5 +68,4 @@ public class RegistroVacina {
 	public void setGrupo(GrupoEnum grupo) {
 		this.grupo = grupo;
 	}
-
 }

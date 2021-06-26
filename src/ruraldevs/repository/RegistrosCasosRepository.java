@@ -107,5 +107,4 @@ public class RegistrosCasosRepository implements Serializable {
         }
         return novaLista;
     }
-
 }

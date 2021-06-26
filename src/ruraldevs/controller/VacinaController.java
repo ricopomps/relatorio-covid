@@ -1,7 +1,6 @@
 package ruraldevs.controller;
 
 import java.util.List;
-
 import ruraldevs.beans.Vacina;
 import ruraldevs.service.VacinaService;
 

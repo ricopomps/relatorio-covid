@@ -44,10 +44,8 @@ public class agendaController {
 
 	@FXML
 	private void initialize() {
-
 		gruposelect.setItems(FXCollections.observableArrayList(GrupoEnum.values()));
 		ufselect.setItems(FXCollections.observableArrayList(EstadosEnum.values()));
-
 	}
 
 	private static final List<VacinasEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VacinasEnum.values()));

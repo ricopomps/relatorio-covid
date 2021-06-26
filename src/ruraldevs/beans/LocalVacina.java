@@ -38,5 +38,4 @@ public class LocalVacina {
 	public void setIsDriveThru(boolean isDriveThru) {
 		this.isDriveThru = isDriveThru;
 	}
-
 }

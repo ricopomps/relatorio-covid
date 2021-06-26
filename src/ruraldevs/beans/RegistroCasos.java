@@ -148,5 +148,4 @@ public class RegistroCasos implements Serializable {
     public void setIsRepeated(boolean isRepeated) {
         this.isRepeated = isRepeated;
     }
-
 }

@@ -1,7 +1,6 @@
 package ruraldevs.controller;
 
 import java.util.List;
-
 import ruraldevs.beans.Pessoa;
 import ruraldevs.service.PessoaService;
 
@@ -27,12 +26,9 @@ public class PessoaController {
 	public void updatePessoa(Pessoa pessoa) {
 		this.service.updatePessoa(pessoa);
 	}
+
 	public void salvar() {
-		
 		this.service.salvarService();
-		
 	}
-
-
 }
 

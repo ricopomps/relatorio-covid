@@ -27,5 +27,4 @@ public class Vacina {
 	public void setNomeVacina(VacinasEnum nomeVacina) {
 		this.nomeVacina = nomeVacina;
 	}
-
 }

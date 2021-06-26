@@ -17,5 +17,4 @@ public enum EstadosEnum {
     public void setNomeEstado(String nomeEstado) {
         this.nomeEstado = nomeEstado;
     }
-
 }

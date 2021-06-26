@@ -33,5 +33,4 @@ public abstract class GenericRepository<T> implements Serializable {
 			this.dados.set(this.dados.indexOf(dado), dado);
 		}
 	}
-
 }

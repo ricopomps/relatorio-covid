@@ -28,5 +28,4 @@ public class DataInicialAposFinalException extends Exception {
     public void setDataFinal(LocalDate dataFinal) {
         this.dataFinal = dataFinal;
     }
-
 }
