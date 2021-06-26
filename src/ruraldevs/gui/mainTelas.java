@@ -8,10 +8,16 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ruraldevs.beans.Pessoa;
 import ruraldevs.beans.RegistroVacina;
+import ruraldevs.controller.EstadosController;
+import ruraldevs.controller.PessoaController;
+import ruraldevs.controller.RegistrosCasosController;
 
 public class mainTelas extends Application {
-	public static Pessoa ac = new Pessoa();
-	public static RegistroVacina ab = new RegistroVacina();
+	public static Pessoa pessoaLogada = new Pessoa();
+	public static RegistroVacina registroVacinaLogado = new RegistroVacina();
+	public static PessoaController pessoaController = new PessoaController();
+	public static RegistrosCasosController registrosCasosController = new RegistrosCasosController();
+	public static EstadosController estadosController = new EstadosController();
 	private static Stage stg;
 	private static Scene mainScene;
 	private static Scene cadasScene;
@@ -48,21 +54,24 @@ public class mainTelas extends Application {
 
 	public static void changeScreen(String scr) {
 		switch (scr) {
-			case "main":
-				stg.setScene(mainScene);
-				break;
-			case "cadas":
-				stg.setScene(cadasScene);
-				break;
-			case "agenda":
-				stg.setScene(agendaScene);
-				break;
-			case "alogin":
-				stg.setScene(aLoginScene);
-				break;
-			case "dados":
-				stg.setScene(dadosScene);
-				break;
+		case "main":
+			stg.setScene(mainScene);
+			break;
+		case "cadas":
+			stg.setScene(cadasScene);
+			break;
+		case "agenda":
+			stg.setScene(agendaScene);
+			break;
+		case "alogin":
+			stg.setScene(aLoginScene);
+			break;
+		case "dados":
+			stg.setScene(dadosScene);
+			break;
+		default:
+			stg.setScene(mainScene);
+			break;
 		}
 	}
 
@@ -70,4 +79,3 @@ public class mainTelas extends Application {
 		launch(args);
 	}
 }
-

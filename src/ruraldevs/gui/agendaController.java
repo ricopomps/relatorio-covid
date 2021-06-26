@@ -66,8 +66,9 @@ public class agendaController {
 		endereco.setEstado(ufselect.getValue());
 		localVacina.setEnderecoVacina(endereco);
 		LocalDate datenow = LocalDate.now().plusDays(15);
-		RegistroVacina cadastro = new RegistroVacina(mainTelas.ac, vacina, datenow, localVacina, gruposelect.getValue());
-		mainTelas.ab = cadastro;
+		RegistroVacina cadastro = new RegistroVacina(mainTelas.pessoaLogada, vacina, datenow, localVacina,
+				gruposelect.getValue());
+		mainTelas.registroVacinaLogado = cadastro;
 		mainTelas.changeScreen("status");
 	}
 }

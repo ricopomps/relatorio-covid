@@ -8,7 +8,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import ruraldevs.beans.Pessoa;
-import ruraldevs.controller.PessoaController;
 
 public class cadasController {
 	@FXML
@@ -32,7 +31,8 @@ public class cadasController {
 	@FXML
 	public void bttncadaspressed(ActionEvent event) throws NullPointerException {
 		try {
-			if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null) || cxsenha.getText().isEmpty()) {
+			if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null)
+					|| cxsenha.getText().isEmpty()) {
 				System.out.println("preencha todos os dados");
 				return;
 			}
@@ -40,13 +40,12 @@ public class cadasController {
 			System.out.println("preencha todos os dados");
 			return;
 		}
-		PessoaController a = new PessoaController();
 
-		Pessoa nome = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
-		a.addPessoa(nome);
-		((PessoaController) a).salvar();
+		Pessoa pessoaCadastrada = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
+		mainTelas.pessoaController.addPessoa(pessoaCadastrada);
+		mainTelas.pessoaController.salvar();
 
-		System.out.println(a.getPessoas());
+		System.out.println(mainTelas.pessoaController.getPessoas());
 
 		mainTelas.changeScreen("agenda");
 	}

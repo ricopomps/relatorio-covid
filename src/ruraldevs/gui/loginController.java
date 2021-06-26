@@ -7,7 +7,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import ruraldevs.beans.Pessoa;
-import ruraldevs.repository.PessoaRepository;
 
 public class loginController {
 	@FXML
@@ -23,16 +22,23 @@ public class loginController {
 
 	@FXML
 	public void bttnlognpressed(ActionEvent event) {
-		for (Pessoa pessoa1 : PessoaRepository.getInstance().getDados()) {
-			if (pessoa1.getCpf().equals(login.getText())) {
-				if (pessoa1.getSenha().equals(senha.getText())) {
+		if (login(login.getText(), senha.getText())) {
+			return;
+		}
+		System.out.println("Usuario ou senha incorretos");
+	}
+
+	private boolean login(String cpf, String senha) {
+		for (Pessoa pessoa1 : mainTelas.pessoaController.getPessoas()) {
+			if (pessoa1.getCpf().equals(cpf)) {
+				if (pessoa1.getSenha().equals(senha)) {
 					mainTelas.changeScreen("alogin");
 					System.out.println("entrou");
-					return;
+					return true;
 				}
 			}
 		}
-		System.out.println("Usuario ou senha incorretos");
+		return false;
 	}
 
 	@FXML

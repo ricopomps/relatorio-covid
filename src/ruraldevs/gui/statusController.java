@@ -23,28 +23,28 @@ public class statusController implements Initializable {
 	Label vacinalabel;
 
 	public void showData() {
-		if (mainTelas.ab.getDose() == 0) {
-			mainTelas.ab.setDose(1);
+		if (mainTelas.registroVacinaLogado.getDose() == 0) {
+			mainTelas.registroVacinaLogado.setDose(1);
 		}
-		if (mainTelas.ab.getDose() == 1) {
-			mainTelas.ab.setDose(2);
+		if (mainTelas.registroVacinaLogado.getDose() == 1) {
+			mainTelas.registroVacinaLogado.setDose(2);
 		}
 
-		System.out.println(mainTelas.ac.getNome());
+		System.out.println(mainTelas.pessoaLogada.getNome());
 
 		nomelabel.setText("aa");
 
-		cpflabel.setText(mainTelas.ac.getCpf());
+		cpflabel.setText(mainTelas.pessoaLogada.getCpf());
 
-		datanasclabel.setText(mainTelas.ac.getSenha());
+		datanasclabel.setText(mainTelas.pessoaLogada.getSenha());
 
-		vacinalabel.setText(mainTelas.ab.getVacina().getNomeVacina().toString());
+		vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
 
-		datalabel.setText(mainTelas.ab.getPessoa().getNome() + "data");
+		datalabel.setText(mainTelas.registroVacinaLogado.getPessoa().getNome() + "data");
 
-		locallabel.setText(mainTelas.ab.getLocalVacina().getEnderecoVacina().getCidade());
+		locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
 
-		doselabel.setText(Integer.toString(mainTelas.ab.getDose()));
+		doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
 	}
 
 	@Override
@@ -56,4 +56,3 @@ public class statusController implements Initializable {
 
 	}
 }
-

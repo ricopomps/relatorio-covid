@@ -97,13 +97,13 @@ public class EstadosRepository implements Serializable {
                 instance = instanciaLocal;
                 instance.salvarArquivo();
             } catch (ParseException e) {
-                System.out.println("DEU MERDA NO PARSE");
+                System.out.println("PARSE EXCEPTION");
             }
 
         } catch (FileNotFoundException e) {
             System.out.println("FILE NOT FOUND");
         } catch (IOException e) {
-            System.out.println("IOEXCEPTION");
+            System.out.println("IO EXCEPTION");
         }
     }
 
