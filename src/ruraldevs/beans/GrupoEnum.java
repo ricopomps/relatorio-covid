@@ -1,35 +1,30 @@
-package Beans;
+package ruraldevs.beans;
 
-public enum GrupoEnum{
-	
-	
+public enum GrupoEnum {
 	pessoas43mais("Pesssoas com 43 anos ou mais"),
 	trabalhadores_industriais("Trabalhadores Industriais"),
-	trabalhadores_a_s("Trabalhadores da assistÍncia social"),
+	trabalhadores_a_s("Trabalhadores da assist√™ncia social"),
 	caminhoneiros("Caminhoneiros"),
-	forcas_seg_salv("ForÁas de seguranÁa e salvamento"),
-	trabalhadores_limpeza("Trabalhadores da Limpeza Urbana e Manejo de ResÌduos SÛlidos"),
-	pessoas_de_rua("Pessoas em SituaÁ„o de Rua"),
-	transporte_coletivo_rodoviario("Trabalhadores de Transporte Coletivo Rodovi·rio Passageiros Urbano e de Longo Curso"),
-	transporte_metro_ferroviario("Trabalhadores de Transporte Metrovi·rio e Ferrovi·rio"),
-	transporte_aereo("Trabalhadores de Transporte AÈreo"),
-	portuarios("Trabalhadores Portu·rios"),
-	transporte_aquaviario("Trabalhadores de Transporte Aquavi·rio"),
-	gravidas("Gr·vidas e PuÈrperas "),
-	deficientes("Pessoas com deficiÍncia"),
+	forcas_seg_salv("For√ßas de seguran√ßa e salvamento"),
+	trabalhadores_limpeza("Trabalhadores da Limpeza Urbana e Manejo de Res√≠duos S√≥lidos"), pessoas_de_rua("Pessoas em Situa√ß√£o de Rua"),
+	transporte_coletivo_rodoviario("Trabalhadores de Transporte Coletivo Rodovi√°rio Passageiros Urbano e de Longo Curso"), transporte_metro_ferroviario("Trabalhadores de Transporte Metrovi√°rio e Ferrovi√°rio"),
+	transporte_aereo("Trabalhadores de Transporte A√©reo"),
+	portuarios("Trabalhadores Portu√°rios"),
+	transporte_aquaviario("Trabalhadores de Transporte Aquavi√°rio"),
+	gravidas("Gr√°vidas e Pu√©rperas "),
+	deficientes("Pessoas com defici√™ncia"),
 	comorbidades("Pessoas com comorbidades"),
-	educacao("Trabalhadores da EducaÁ„o"),
-	saude("Trabalhadores da Sa˙de");
+	educacao("Trabalhadores da Educa√ß√£o"),
+	saude("Trabalhadores da Sa√∫de");
 
 	private String nomeGrupo;
+
 	GrupoEnum(String nomeGrupo) {
 		this.nomeGrupo = nomeGrupo;
-
 	}
+
 	@Override
-    public String toString() {
-        return nomeGrupo;
+	public String toString() {
+		return nomeGrupo;
 	}
-
-
 }
