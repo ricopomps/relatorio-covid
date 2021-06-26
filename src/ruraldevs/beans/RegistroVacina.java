@@ -15,6 +15,7 @@ public class RegistroVacina {
 		this.dataDaVacina = dataDaVacina;
 		this.localVacina = localVacina;
 	}
+	public RegistroVacina() {}
 
 	// GETTERS E SETTERS
 	public LocalVacina getLocalVacina() {
