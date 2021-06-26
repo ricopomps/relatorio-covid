@@ -60,19 +60,13 @@ public class statusController implements Initializable{
 	}
 	
 
-//	@FXML
-//	 private void initialize() {
-//	
-//	 }
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		contentSelect();
 		
 	}
 	private void contentSelect() {
-		showData();
+		
 		
 	}
 
