@@ -1,21 +1,23 @@
 package ruraldevs.beans;
 
 public enum GrupoEnum {
-	pessoas43mais("Pesssoas com 43 anos ou mais"),
-	trabalhadores_industriais("Trabalhadores Industriais"),
-	trabalhadores_a_s("Trabalhadores da assistência social"),
-	caminhoneiros("Caminhoneiros"),
-	forcas_seg_salv("Forças de segurança e salvamento"),
-	trabalhadores_limpeza("Trabalhadores da Limpeza Urbana e Manejo de Resíduos Sólidos"), pessoas_de_rua("Pessoas em Situação de Rua"),
-	transporte_coletivo_rodoviario("Trabalhadores de Transporte Coletivo Rodoviário Passageiros Urbano e de Longo Curso"), transporte_metro_ferroviario("Trabalhadores de Transporte Metroviário e Ferroviário"),
-	transporte_aereo("Trabalhadores de Transporte Aéreo"),
-	portuarios("Trabalhadores Portuários"),
-	transporte_aquaviario("Trabalhadores de Transporte Aquaviário"),
-	gravidas("Grávidas e Puérperas "),
-	deficientes("Pessoas com deficiência"),
-	comorbidades("Pessoas com comorbidades"),
-	educacao("Trabalhadores da Educação"),
-	saude("Trabalhadores da Saúde");
+	PESSOAS_43_OU_MAIS("Pesssoas com 43 anos ou mais"),
+	TRABALHADORES_INDUSTRIAIS("Trabalhadores Industriais"),
+	TRABALHADORES_A_S("Trabalhadores da assistência social"),
+	CAMINHONEIROS("Caminhoneiros"),
+	FORCAS_SEG_SALV("Forças de segurança e salvamento"),
+	TRABALHADORES_LIMPEZA("Trabalhadores da Limpeza Urbana e Manejo de Resíduos Sólidos"),
+	PESSOAS_DE_RUA("Pessoas em Situação de Rua"),
+	TRANSPORTE_COLETIVO_RODOVIARIO("Trabalhadores de Transporte Coletivo Rodoviário Passageiros Urbano e de Longo Curso"),
+	TRANSPORTE_METRO_FERROVIARIO("Trabalhadores de Transporte Metroviário e Ferroviário"),
+	TRANSPORTE_AEREO("Trabalhadores de Transporte Aéreo"),
+	PORTUARIOS("Trabalhadores Portuários"),
+	TRANSPORTE_AQUAVIARIO("Trabalhadores de Transporte Aquaviário"),
+	GRAVIDAS("Grávidas e Puérperas"),
+	DEFICIENTES("Pessoas com deficiência"),
+	COMORBIDADES("Pessoas com comorbidades"),
+	EDUCACAO("Trabalhadores da Educação"),
+	SAUDE("Trabalhadores da Saúde");
 
 	private String nomeGrupo;
 
