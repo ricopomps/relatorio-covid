@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class mainTelas extends Application {
+	public static Pessoa ac=new Pessoa();
+	public static RegistroVacina ab=new RegistroVacina();
 	private static Stage stg;
 	private static Scene mainScene;
 	private static Scene cadasScene;
