@@ -1,6 +1,6 @@
 package ruraldevs.gui;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +65,7 @@ public class agendaController {
 		vacina.setNomeVacina(random());
 		endereco.setEstado(ufselect.getValue());
 		localVacina.setEnderecoVacina(endereco);
-		LocalDate datenow = LocalDate.now().plusDays(15);
+		LocalDateTime datenow = LocalDateTime.now().plusDays(15);
 		RegistroVacina cadastro = new RegistroVacina(mainTelas.pessoaLogada, vacina, datenow, localVacina,
 				gruposelect.getValue());
 		mainTelas.registroVacinaLogado = cadastro;
