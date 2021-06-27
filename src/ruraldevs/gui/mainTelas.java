@@ -22,7 +22,7 @@ public class mainTelas extends Application {
 	private static Scene mainScene;
 	private static Scene cadasScene;
 	private static Scene agendaScene;
-	private static Scene aLoginScene;
+	private static Scene statusScene;
 	private static Scene dadosScene;
 
 	@Override
