@@ -1,5 +1,7 @@
 package ruraldevs.gui;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +26,7 @@ public class mainTelas extends Application {
 	private static Scene agendaScene;
 	private static Scene statusScene;
 	private static Scene dadosScene;
+	private static Parent fxmlStatus;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -38,9 +41,8 @@ public class mainTelas extends Application {
 		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/agendasample.fxml"));
 		agendaScene = new Scene(fxmlAgenda);
 
-		Parent fxmlStatus = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/statussample.fxml"));
-		statusScene = new Scene(fxmlStatus);
-
+		
+		
 		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/telaDados.fxml"));
 		dadosScene = new Scene(fxmlTelaDados);
 
@@ -64,6 +66,13 @@ public class mainTelas extends Application {
 			stg.setScene(agendaScene);
 			break;
 		case "status":
+			try {
+				fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/statussample.fxml"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			statusScene = new Scene(fxmlStatus);
 			stg.setScene(statusScene);
 			break;
 		case "dados":

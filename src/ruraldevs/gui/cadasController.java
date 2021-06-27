@@ -46,7 +46,7 @@ public class cadasController {
 		mainTelas.pessoaController.salvar();
 
 		System.out.println(mainTelas.pessoaController.getPessoas());
-
+        mainTelas.pessoaLogada = pessoaCadastrada;
 		mainTelas.changeScreen("agenda");
 	}
 }

@@ -34,6 +34,7 @@ public class loginController {
 				if (pessoa1.getSenha().equals(senha)) {
 					mainTelas.changeScreen("alogin");
 					System.out.println("entrou");
+					mainTelas.pessoaLogada = pessoa1;
 					return true;
 				}
 			}
