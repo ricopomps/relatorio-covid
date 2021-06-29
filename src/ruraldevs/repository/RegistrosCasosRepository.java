@@ -48,7 +48,7 @@ public class RegistrosCasosRepository implements Serializable {
 
     private static void lerDoArquivo() {
         instance = new RegistrosCasosRepository();
-        try (BufferedReader br = new BufferedReader(new FileReader("./data/caso_full.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./src/ruraldevs/data/caso_full.csv"))) {
             String line = br.readLine();
             line = br.readLine();
             while (line != null) {
