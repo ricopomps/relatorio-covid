@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ruraldevs.beans.Pessoa;
 import ruraldevs.beans.RegistroVacina;
-import ruraldevs.controller.EstadosController;
 import ruraldevs.controller.PessoaController;
 import ruraldevs.controller.RegistrosCasosController;
 
@@ -19,7 +18,6 @@ public class mainTelas extends Application {
 	public static RegistroVacina registroVacinaLogado = new RegistroVacina();
 	public static PessoaController pessoaController = new PessoaController();
 	public static RegistrosCasosController registrosCasosController = new RegistrosCasosController();
-	public static EstadosController estadosController = new EstadosController();
 	private static Stage stg;
 	private static Scene mainScene;
 	private static Scene cadasScene;
@@ -41,8 +39,6 @@ public class mainTelas extends Application {
 		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/agendasample.fxml"));
 		agendaScene = new Scene(fxmlAgenda);
 
-		
-		
 		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/telaDados.fxml"));
 		dadosScene = new Scene(fxmlTelaDados);
 
@@ -56,31 +52,31 @@ public class mainTelas extends Application {
 
 	public static void changeScreen(String scr) {
 		switch (scr) {
-		case "main":
-			stg.setScene(mainScene);
-			break;
-		case "cadas":
-			stg.setScene(cadasScene);
-			break;
-		case "agenda":
-			stg.setScene(agendaScene);
-			break;
-		case "status":
-			try {
-				fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/statussample.fxml"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			statusScene = new Scene(fxmlStatus);
-			stg.setScene(statusScene);
-			break;
-		case "dados":
-			stg.setScene(dadosScene);
-			break;
-		default:
-			stg.setScene(mainScene);
-			break;
+			case "main":
+				stg.setScene(mainScene);
+				break;
+			case "cadas":
+				stg.setScene(cadasScene);
+				break;
+			case "agenda":
+				stg.setScene(agendaScene);
+				break;
+			case "status":
+				try {
+					fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/statussample.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				statusScene = new Scene(fxmlStatus);
+				stg.setScene(statusScene);
+				break;
+			case "dados":
+				stg.setScene(dadosScene);
+				break;
+			default:
+				stg.setScene(mainScene);
+				break;
 		}
 	}
 
