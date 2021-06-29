@@ -32,7 +32,7 @@ public class loginController {
 		for (Pessoa pessoa1 : mainTelas.pessoaController.getPessoas()) {
 			if (pessoa1.getCpf().equals(cpf)) {
 				if (pessoa1.getSenha().equals(senha)) {
-					mainTelas.changeScreen("alogin");
+					mainTelas.changeScreen("status");
 					System.out.println("entrou");
 					mainTelas.pessoaLogada = pessoa1;
 					return true;
