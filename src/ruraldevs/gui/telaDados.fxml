@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -38,7 +39,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="cbEstados" onAction="#preencherCidades" prefWidth="150.0" value="Estados" />
+                        <ChoiceBox fx:id="choiceBEstados" onAction="#preencherCidades" prefWidth="150.0" value="Estados" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="160.0" spacing="5.0">
@@ -48,27 +49,17 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="cbCidades" prefWidth="150.0" />
+                        <ChoiceBox fx:id="choiceBCidades" prefWidth="150.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="160.0" spacing="5.0">
                      <children>
-                        <Label text="Data Inicial">
+                        <Label text="Período">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="datepInicial" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="160.0" spacing="5.0">
-                     <children>
-                        <Label text="Data Final">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="datepFinal" />
+                        <ChoiceBox fx:id="choiceBPeriodo" onAction="#calcularPeriodo" prefWidth="150.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="160.0" spacing="5.0">
@@ -90,6 +81,9 @@
                   <Font size="15.0" />
                </font></Label>
          </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </HBox>
    </bottom>
    <center>
@@ -105,7 +99,15 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <LineChart fx:id="chartNovosCasos" prefHeight="275.0" prefWidth="666.0" title="NOVOS CASOS">
+                  <BarChart fx:id="chartNovosCasos" title="NOVOS CASOS CONFIRMADOS">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <LineChart fx:id="chartTotalCasos" title="TOTAL DE CASOS CONFIRMADOS" GridPane.columnIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -113,29 +115,24 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <LineChart fx:id="chartTotalCasos" title="TOTAL DE CASOS" GridPane.columnIndex="1">
+                  <BarChart fx:id="chartNovasMortes" title="NOVAS MORTES" GridPane.rowIndex="1">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
-                  </LineChart>
-                  <LineChart fx:id="chartNovasMortes" title="MORTES" GridPane.rowIndex="1">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" />
-                     </yAxis>
-                  </LineChart>
+                  </BarChart>
                   <LineChart fx:id="chartTotalMortes" title="TOTAL DE MORTES" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" />
-                     </yAxis>
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </LineChart>
                </children>
             </GridPane>
