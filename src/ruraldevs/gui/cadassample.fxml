@@ -32,7 +32,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="25.0">
                      <image>
-                        <Image url="@proximo.png" />
+                        <Image url="@back.png" />
                      </image>
                   </ImageView>
                </graphic>
