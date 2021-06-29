@@ -17,4 +17,9 @@ public enum EstadosEnum {
     public void setNomeEstado(String nomeEstado) {
         this.nomeEstado = nomeEstado;
     }
+
+    @Override
+    public String toString() {
+        return nomeEstado;
+    }
 }
