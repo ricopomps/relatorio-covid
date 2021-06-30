@@ -1,6 +1,7 @@
 package ruraldevs.gui;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,33 +24,27 @@ public class statusController implements Initializable {
 	Label vacinalabel;
 
 	public void showData() {
-		try {
-			if (mainTelas.registroVacinaLogado.getDose() == 0) {
-				mainTelas.registroVacinaLogado.setDose(1);
-			}
-			if (mainTelas.registroVacinaLogado.getDose() == 1) {
-				mainTelas.registroVacinaLogado.setDose(2);
-			}
+		 mainTelas.registroVacinaLogado.setDose(1);
+		    
 
-			System.out.println(mainTelas.pessoaLogada.getNome());
+		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+		    String data1 = mainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
+		    String data2 = mainTelas.pessoaLogada.getDataNascimento().format(formatter);
 
-			nomelabel.setText("aa");
+		    nomelabel.setText(mainTelas.pessoaLogada.getNome());
 
-			cpflabel.setText(mainTelas.pessoaLogada.getCpf());
+		    cpflabel.setText(mainTelas.pessoaLogada.getCpf());
 
-			datanasclabel.setText(mainTelas.pessoaLogada.getSenha());
+		    datanasclabel.setText(data2);
 
-			vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
+		    vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
 
-			datalabel.setText(mainTelas.registroVacinaLogado.getPessoa().getNome() + "data");
+		    datalabel.setText(data1);
 
-			locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
+		    locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
 
-			doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
-		
-		} catch (Exception e) {
-		}
-		}
+		    doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
+		  }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

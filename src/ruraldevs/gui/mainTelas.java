@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 import ruraldevs.beans.Pessoa;
 import ruraldevs.beans.RegistroVacina;
 import ruraldevs.controller.PessoaController;
+import ruraldevs.controller.RegistroVacinaController;
 import ruraldevs.controller.RegistrosCasosController;
 
 public class mainTelas extends Application {
+	 public static RegistroVacinaController registroController = new RegistroVacinaController();
 	public static Pessoa pessoaLogada = new Pessoa();
 	public static RegistroVacina registroVacinaLogado = new RegistroVacina();
 	public static PessoaController pessoaController = new PessoaController();

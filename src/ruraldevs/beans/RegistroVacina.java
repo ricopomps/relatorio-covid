@@ -1,16 +1,17 @@
 package ruraldevs.beans;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RegistroVacina {
 	private Pessoa pessoa;
 	private Vacina vacina;
 	private int dose;
-	private LocalDateTime dataDaVacina;
+	private LocalDate dataDaVacina;
 	private LocalVacina localVacina;
 	private GrupoEnum grupo;
 
-	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDateTime dataDaVacina, LocalVacina localVacina, GrupoEnum grupo) {
+	public RegistroVacina(Pessoa pessoa, Vacina vacina, LocalDate dataDaVacina, LocalVacina localVacina, GrupoEnum grupo) {
 		this.pessoa = pessoa;
 		this.vacina = vacina;
 		this.dataDaVacina = dataDaVacina;
@@ -19,6 +20,7 @@ public class RegistroVacina {
 	}
 
 	public RegistroVacina() {}
+
 
 	// GETTERS E SETTERS
 	public LocalVacina getLocalVacina() {
@@ -45,11 +47,11 @@ public class RegistroVacina {
 		this.vacina = vacina;
 	}
 
-	public LocalDateTime getDataDaVacina() {
+	public LocalDate getDataDaVacina() {
 		return dataDaVacina;
 	}
 
-	public void setDataDaVacina(LocalDateTime dataDaVacina) {
+	public void setDataDaVacina(LocalDate dataDaVacina) {
 		this.dataDaVacina = dataDaVacina;
 	}
 
