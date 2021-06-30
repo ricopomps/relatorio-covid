@@ -26,4 +26,8 @@ public class RegistroVacinaController {
 	public void updateRegistroVacina(RegistroVacina registroVacina) {
 		this.service.updateRegistroVacina(registroVacina);
 	}
+	public void salvarArquivo() {
+		
+		this.service.salvarArquivo();
+	}
 }

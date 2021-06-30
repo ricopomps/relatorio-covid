@@ -65,7 +65,7 @@ public class mainTelas extends Application {
 				try {
 					fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/statussample.fxml"));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 				statusScene = new Scene(fxmlStatus);
