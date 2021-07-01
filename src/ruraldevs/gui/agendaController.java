@@ -8,18 +8,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
-
 import ruraldevs.gui.mainTelas;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.util.Callback;
 import ruraldevs.beans.Endereco;
 import ruraldevs.beans.EstadosEnum;
@@ -29,8 +30,7 @@ import ruraldevs.beans.RegistroVacina;
 import ruraldevs.beans.Vacina;
 import ruraldevs.beans.VacinasEnum;
 
-public class agendaController  implements Initializable{
-
+public class agendaController implements Initializable {
 
 	  public static int a = 0;
 	  @FXML
@@ -83,14 +83,18 @@ public class agendaController  implements Initializable{
 
 	  @FXML
 	  public void bttnagendarpressed(ActionEvent event) throws Exception {
+		  Alert alert = new Alert(AlertType.WARNING);
+		  	alert.setTitle("Dados incompletos");
+		  	alert.setHeaderText("Dados vazios ou incorretos");
+		  	alert.setContentText("Por favor, preencha os campos novamente com as informações corretas."); 
 		  try {
 		      if (cidadefield.getText().isEmpty() || ceptext.getText().isEmpty() || dtVac.getValue().equals(null) || gruposelect.getValue().equals(null)
 		    		 || ufselect.getValue().equals(null)) {
-		        System.out.println("preencha todos os dados");
+		    	  alert.showAndWait();
 		        return;
 		      }
 		    } catch (NullPointerException e) {
-		      System.out.println("preencha todos os dados");
+		    	alert.showAndWait();
 		      return;
 		    }
 		 

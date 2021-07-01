@@ -4,30 +4,39 @@ package ruraldevs.gui;
 import ruraldevs.beans.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import ruraldevs.beans.Pessoa;
 
 public class loginController {
-	@FXML
-	Button bttnlogin;
-	@FXML
-	Button bttndados;
-	@FXML
-	Hyperlink bttncadas;
-	@FXML
-	TextField login;
-	@FXML
-	PasswordField senha;
 
-	 @FXML
+	  @FXML
+	  Button bttnlogin;
+	  @FXML
+	  Button bttndados;
+	  @FXML
+	  Hyperlink bttncadas;
+	  @FXML
+	  TextField login;
+	  @FXML
+	  PasswordField senha;
+
+	  @FXML
 	  public void bttnlognpressed(ActionEvent event) {
 			if (login(login.getText(), senha.getText())) {
 				return;
 			}
-			System.out.println("Usuario ou senha incorretos");
+			Alert alert = new Alert(AlertType.WARNING);
+	    	alert.setTitle("Usuario ou senha incorretos");
+	    	alert.setHeaderText("Dados vazios ou incorretos");
+	    	alert.setContentText("Por favor, preencha os campos novamente com as informações corretas."); 	 
+	    	alert.showAndWait();
+
+			
 		}
 
 		private boolean login(String cpf, String senha) {
@@ -39,6 +48,7 @@ public class loginController {
 						
 						
 						System.out.println(mainTelas.registroController.getRegistrosVacinas());
+						System.out.println(mainTelas.pessoaController.getPessoas());
 						for(RegistroVacina registro:mainTelas.registroController.getRegistrosVacinas()) {
 							System.out.println("aa");
 						if(pessoa.equals(registro.getPessoa())){
@@ -61,15 +71,15 @@ public class loginController {
 	  public void bttncadaspressed(ActionEvent event) {
 
 	    mainTelas.changeScreen("cadas");
-	    System.out.println("aa3");
+	   
 
 	  }
 
 	  @FXML
 	  public void bttndadospressed(ActionEvent event) {
 
-	    System.out.println("bb1");
-	   // mainTelas.changeScreen("dados");
+	    System.out.println("dados");
+	    
 
 	  }
 

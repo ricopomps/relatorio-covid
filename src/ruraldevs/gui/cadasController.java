@@ -3,39 +3,42 @@ package ruraldevs.gui;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
-
-import ruraldevs.beans.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.util.Callback;
 import ruraldevs.beans.Pessoa;
 import ruraldevs.controller.PessoaController;
 
-public class cadasController implements Initializable{
-	@FXML
-	Hyperlink bttnvoltar;
-	@FXML
-	Button bttncadas;
-	@FXML
-	PasswordField cxsenha;
-	@FXML
-	TextField cxnome;
-	@FXML
-	TextField cxcpf;
-	@FXML
-	DatePicker datanasc;
+public class cadasController implements Initializable {
+
+	  @FXML
+	  Hyperlink bttnvoltar;
+	  @FXML
+	  Button bttncadas;
+	  @FXML
+	  PasswordField cxsenha;
+	  @FXML
+	  TextField cxnome;
+	  @FXML
+	  TextField cxcpf;
+	  @FXML
+	  DatePicker datanasc;
 
 	  @FXML
 	  public void bttnvoltarpressed(ActionEvent event) {
 	    mainTelas.changeScreen("main");
+	    cxnome.clear();
+	    cxcpf.clear();
+	    cxsenha.clear();
 	  }
 
 	  @Override
@@ -56,13 +59,20 @@ public class cadasController implements Initializable{
 
 	  @FXML
 	  public void bttncadaspressed(ActionEvent event) throws NullPointerException {
+		  Alert alert = new Alert(AlertType.WARNING);
+	  	alert.setTitle("Dados incompletos");
+	  	alert.setHeaderText("Dados vazios ou incorretos");
+	  	alert.setContentText("Por favor, preencha os campos novamente com as informações corretas."); 	 
+	  	
 	    try {
 	      if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null) || cxsenha.getText().isEmpty()) {
 	        System.out.println("preencha todos os dados");
+	        alert.showAndWait();
 	        return;
 	      }
 	    } catch (NullPointerException e) {
-	      System.out.println("preencha todos os dados");
+
+	    	alert.showAndWait();
 	      return;
 	    }
 	    PessoaController a = new PessoaController();
@@ -74,4 +84,8 @@ public class cadasController implements Initializable{
 	    System.out.println(a.getPessoas());
 	    
 
-	    mainTelas.changeScreen("agenda");}}
+	    mainTelas.changeScreen("agenda");
+
+	  }
+
+	}
