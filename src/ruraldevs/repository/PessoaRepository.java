@@ -33,7 +33,6 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 
 	public void deletePessoa(Pessoa pessoa) {
 		this.deleteDado(pessoa);
-
 	}
 
 	public void updatePessoa(Pessoa pessoa) {
