@@ -25,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -38,9 +39,9 @@ public class TelaDadosController implements Initializable {
 	@FXML
 	private BorderPane paneBorderPane;
 	@FXML
-	private ChoiceBox<EstadosEnum> choiceBEstados;
+	private ComboBox<EstadosEnum> comboBEstados;
 	@FXML
-	private ChoiceBox<String> choiceBCidades;
+	private ComboBox<String> comboBCidades;
 	@FXML
 	private ChoiceBox<String> choiceBPeriodo;
 	@FXML
@@ -82,7 +83,10 @@ public class TelaDadosController implements Initializable {
 					stage.setTitle("Selecione um período personalizado");
 					stage.setScene(telaSelecionarDataScene);
 					stage.getIcons().add(new Image("/ruraldevs/gui/icone.png"));
-					stage.show();
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.showAndWait();
+					dataInicial = TelaSelecionarDataController.getInstance().getDatePInicial().getValue();
+					dataFinal = TelaSelecionarDataController.getInstance().getDatePFinal().getValue();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -91,11 +95,6 @@ public class TelaDadosController implements Initializable {
 				dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 				break;
 		}
-	}
-
-	public void handleDatasSelecionadasEvent(DatasSelecionadasEvent event) {
-		dataInicial = event.getDataInicial();
-		dataFinal = event.getDataFinal();
 	}
 
 	@FXML
@@ -118,7 +117,7 @@ public class TelaDadosController implements Initializable {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
 
-			List<RegistroCasos> listaRegistrosCasos = mainTelas.registrosCasosController.filtrar(choiceBEstados.getValue().getNomeEstado(), choiceBCidades.getValue(), dataInicial, dataFinal);
+			List<RegistroCasos> listaRegistrosCasos = mainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
 
 			for (RegistroCasos registroCasos : listaRegistrosCasos) {
 				novosCasosSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovosCasos()));
@@ -136,7 +135,7 @@ public class TelaDadosController implements Initializable {
 		} catch (DataInicialAposFinalException exception) {
 			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
 
-			Alert alert = new Alert(AlertType.ERROR, "haha");
+			Alert alert = new Alert(AlertType.ERROR, "");
 
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.initOwner(stage);
@@ -169,20 +168,20 @@ public class TelaDadosController implements Initializable {
 
 	@FXML
 	public void preencherCidades(ActionEvent event) {
-		EstadosEnum estado = choiceBEstados.getValue();
+		EstadosEnum estado = comboBEstados.getValue();
 		if (estado.equals("Brasil")) {
 			return;
 		}
-		choiceBCidades.getItems().clear();
-		choiceBCidades.setDisable(false);
-		choiceBCidades.getItems().add(null);
+		comboBCidades.getItems().clear();
+		comboBCidades.setDisable(false);
+		comboBCidades.getItems().add(null);
 		JSONParser parser = new JSONParser();
 		try (FileReader reader = new FileReader(String.format("./src/ruraldevs/data/estados/%s.json", estado.name()))) {
 			try {
 				Object obj = parser.parse(reader);
 				JSONObject estadoJson = (JSONObject) obj;
 				JSONArray cidadesArray = (JSONArray) estadoJson.get("cidades");
-				choiceBCidades.getItems().addAll(cidadesArray);
+				comboBCidades.getItems().addAll(cidadesArray);
 			} catch (ParseException e) {
 				System.out.println("PARSE EXCEPTION");
 			}
@@ -196,14 +195,13 @@ public class TelaDadosController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		paneBorderPane.addEventFilter(DatasSelecionadasEvent.ANY, this::handleDatasSelecionadasEvent);
-		choiceBCidades.getItems().add("Escolha um estado");
-		choiceBCidades.setValue("Escolha um estado");
-		choiceBCidades.setDisable(true);
-		// cbEstados.getItems().add("Brasil");
+		comboBCidades.getItems().add("Escolha um estado");
+		comboBCidades.setValue("Escolha um estado");
+		comboBCidades.setDisable(true);
+		// comboBEstados.getItems().add("Brasil");
 		String[] opcoesPeriodo = {"1 Semana", "2 Semanas", "1 mês", "Todo período", "Personalizado"};
 		choiceBPeriodo.getItems().addAll(opcoesPeriodo);
 		choiceBPeriodo.setValue("1 Semana");
-		choiceBEstados.getItems().addAll(EstadosEnum.values());
+		comboBEstados.getItems().addAll(EstadosEnum.values());
 	}
 }
