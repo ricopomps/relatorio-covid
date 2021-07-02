@@ -24,31 +24,29 @@ public class statusController implements Initializable {
 	Label vacinalabel;
 
 	public void showData() {
-		 mainTelas.registroVacinaLogado.setDose(1);
-		    
+		mainTelas.registroVacinaLogado.setDose(1);
 
-		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-		    String data1 = mainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
-		    String data2 = mainTelas.pessoaLogada.getDataNascimento().format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+		String data1 = mainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
+		String data2 = mainTelas.pessoaLogada.getDataNascimento().format(formatter);
 
-		    nomelabel.setText(mainTelas.pessoaLogada.getNome());
+		nomelabel.setText(mainTelas.pessoaLogada.getNome());
 
-		    cpflabel.setText(mainTelas.pessoaLogada.getCpf());
+		cpflabel.setText(mainTelas.pessoaLogada.getCpf());
 
-		    datanasclabel.setText(data2);
+		datanasclabel.setText(data2);
 
-		    vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
+		vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
 
-		    datalabel.setText(data1);
+		datalabel.setText(data1);
 
-		    locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
+		locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
 
-		    doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
-		  }
+		doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		showData();
 	}
-
 }
