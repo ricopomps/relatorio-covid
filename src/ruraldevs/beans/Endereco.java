@@ -1,12 +1,13 @@
 package ruraldevs.beans;
 
-public class Endereco implements Serializable{
+import java.io.Serializable;
+
+public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 5649077348659936748L;
 	private String cidade;
 	private EstadosEnum estado;
 	private String cep;
-
 
 	public Endereco() {}
 

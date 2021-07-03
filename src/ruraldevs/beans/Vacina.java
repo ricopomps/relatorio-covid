@@ -1,5 +1,7 @@
 package ruraldevs.beans;
 
+import java.io.Serializable;
+
 public class Vacina implements Serializable {
 
 	private static final long serialVersionUID = -3294700113232650786L;
