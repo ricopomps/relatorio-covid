@@ -82,7 +82,7 @@ public class TelaDadosController implements Initializable {
 					Stage stage = new Stage();
 					stage.setTitle("Selecione um período personalizado");
 					stage.setScene(telaSelecionarDataScene);
-					stage.getIcons().add(new Image("/ruraldevs/gui/icone.png"));
+					stage.getIcons().add(new Image("/ruraldevs/gui/assets/icone.png"));
 					stage.initModality(Modality.APPLICATION_MODAL);
 					stage.showAndWait();
 					dataInicial = TelaSelecionarDataController.getInstance().getDatePInicial().getValue();
