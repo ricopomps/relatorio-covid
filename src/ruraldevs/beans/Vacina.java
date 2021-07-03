@@ -1,7 +1,8 @@
 package ruraldevs.beans;
 
-public class Vacina {
+public class Vacina implements Serializable {
 
+	private static final long serialVersionUID = -3294700113232650786L;
 	private String lote;
 	private VacinasEnum nomeVacina;
 
