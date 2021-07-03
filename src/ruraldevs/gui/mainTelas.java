@@ -32,23 +32,23 @@ public class mainTelas extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		stg = primaryStage;
 
-		Parent fxmlMain = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/sample.fxml"));
+		Parent fxmlMain = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/sample.fxml"));
 		mainScene = new Scene(fxmlMain);
 
-		Parent fxmlCadas = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/cadassample.fxml"));
+		Parent fxmlCadas = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/cadassample.fxml"));
 		cadasScene = new Scene(fxmlCadas);
 
-		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/agendasample.fxml"));
+		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/agendasample.fxml"));
 		agendaScene = new Scene(fxmlAgenda);
 
-		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/telaDados.fxml"));
+		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/telaDados.fxml"));
 		dadosScene = new Scene(fxmlTelaDados);
 
 		primaryStage.setScene(mainScene);
 
 		primaryStage.setTitle("VacinaBrasil");
 		primaryStage.setResizable(false);
-		primaryStage.getIcons().add(new Image("/ruraldevs/gui/icone.png"));
+		primaryStage.getIcons().add(new Image("/ruraldevs/gui/assets/icone.png"));
 		primaryStage.show();
 	}
 
@@ -65,7 +65,7 @@ public class mainTelas extends Application {
 				break;
 			case "status":
 				try {
-					fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/statussample.fxml"));
+					fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/fxml/statussample.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="650.0" fitWidth="1350.0">
                <image>
-                  <Image url="@status.png" />
+                  <Image url="@assets/status.png" />
                </image>
             </ImageView>
             <Label fx:id="nomelabel" layoutX="110.0" layoutY="192.0" textFill="#fffdfd">

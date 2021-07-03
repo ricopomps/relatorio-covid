@@ -76,7 +76,7 @@ public class TelaDadosController implements Initializable {
 				break;
 			case "Personalizado":
 				try {
-					FXMLLoader fxmlTelaSelecionarData = new FXMLLoader(getClass().getResource("/ruraldevs/gui/telaSelecionarData.fxml"));
+					FXMLLoader fxmlTelaSelecionarData = new FXMLLoader(getClass().getResource("/ruraldevs/gui/fxml/telaSelecionarData.fxml"));
 					fxmlTelaSelecionarData.setController(TelaSelecionarDataController.getInstance());
 					telaSelecionarDataScene = new Scene(fxmlTelaSelecionarData.load(), 300, 200);
 					Stage stage = new Stage();
@@ -115,7 +115,6 @@ public class TelaDadosController implements Initializable {
 			totalMortesSeries.setName("Número total de mortes");
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
-
 
 			List<RegistroCasos> listaRegistrosCasos = mainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
 

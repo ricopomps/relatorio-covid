@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="650.0" fitWidth="869.0" layoutX="474.0" layoutY="-10.0">
                <image>
-                  <Image url="@agendamento2.png" />
+                  <Image url="@assets/agendamento2.png" />
                </image>
             </ImageView>
             <ChoiceBox fx:id="gruposelect" layoutX="1067.0" layoutY="377.0" prefHeight="41.0" prefWidth="174.0" />
@@ -36,14 +36,14 @@
                <children>
                   <ImageView fitHeight="1100.0" fitWidth="481.0">
                      <image>
-                        <Image url="@agendamento1.png" />
+                        <Image url="@assets/agendamento1.png" />
                      </image>
                   </ImageView>
                   <Hyperlink fx:id="voltarbttn" layoutX="7.0" layoutY="14.0" onAction="#voltarpressed" prefHeight="40.0" prefWidth="34.0">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0">
                            <image>
-                              <Image url="@back.png" />
+                              <Image url="@assets/back.png" />
                            </image>
                         </ImageView>
                      </graphic>
