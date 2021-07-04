@@ -1,16 +1,12 @@
 package ruraldevs.repository;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 import ruraldevs.beans.EstadosEnum;
 import ruraldevs.beans.RegistroCasos;
 import ruraldevs.exceptions.DadosNaoEncontradosException;
@@ -56,41 +52,39 @@ public class RegistrosCasosRepository implements Serializable {
     }
 
     private static void lerDoArquivo() {
-        Path path = Paths.get("./src/ruraldevs/data/caso_full.csv");
         instance = new RegistrosCasosRepository();
-        try (BufferedReader bReader = Files.newBufferedReader(path)) {
-            int initialCapacity = (int) Files.lines(path).count();
-            instance = new RegistrosCasosRepository(initialCapacity);
-
-            Iterable<CSVRecord> registrosCasos = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(bReader);
-
-            for (CSVRecord csvRecord : registrosCasos) {
-                EstadosEnum estado = EstadosEnum.valueOf(csvRecord.get("state"));
-                String cidade = csvRecord.get("city");
-                LocalDate data = LocalDate.parse(csvRecord.get("date"));
-                LocalDate ultimaData = LocalDate.parse(csvRecord.get("last_available_date"));
+        try (BufferedReader br = new BufferedReader(new FileReader("./src/ruraldevs/data/caso_full.csv"))) {
+            String line = br.readLine();
+            line = br.readLine();
+            while (line != null) {
+                String[] dados = line.split(",");
+                EstadosEnum estado = EstadosEnum.valueOf(dados[15]);
+                String cidade = dados[0];
+                LocalDate data = LocalDate.parse(dados[2]);
+                LocalDate ultimaData = LocalDate.parse(dados[10]);
                 boolean isState;
-                if (csvRecord.get("place_type").equals("state")) {
+                if (dados[14].equals("state")) {
                     isState = true;
                 } else {
                     isState = false;
                 }
                 boolean isRepeated;
-                if (csvRecord.get("is_repeated").equals("true")) {
+                if (dados[7].equals("true")) {
                     isRepeated = true;
                 } else {
                     isRepeated = false;
                 }
-                long numeroDeNovosCasos = Long.parseLong(csvRecord.get("new_confirmed"));
-                long numeroTotalDeCasos = Long.parseLong(csvRecord.get("last_available_confirmed"));
-                long numeroDeNovasMortes = Long.parseLong(csvRecord.get("new_deaths"));
-                long numeroTotalDeMortes = Long.parseLong(csvRecord.get("last_available_deaths"));
-                boolean isLast = Boolean.parseBoolean(csvRecord.get("is_last").toLowerCase());
+                long numeroDeNovosCasos = Long.parseLong(dados[16]);
+                long numeroTotalDeCasos = Long.parseLong(dados[8]);
+                long numeroDeNovasMortes = Long.parseLong(dados[17]);
+                long numeroTotalDeMortes = Long.parseLong(dados[12]);
+                boolean isLast = Boolean.parseBoolean(dados[6].toLowerCase());
                 if (cidade.equals("")) {
                     instance.addDado(new RegistroCasos(estado, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes, isLast, isRepeated));
                 } else {
                     instance.addDado(new RegistroCasos(estado, cidade, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes, isLast, isRepeated));
                 }
+                line = br.readLine();
             }
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
