@@ -14,7 +14,7 @@ import ruraldevs.controller.PessoaController;
 import ruraldevs.controller.RegistroVacinaController;
 import ruraldevs.controller.RegistrosCasosController;
 
-public class mainTelas extends Application {
+public class MainTelas extends Application {
 	public static RegistroVacinaController registroController = new RegistroVacinaController();
 	public static Pessoa pessoaLogada = new Pessoa();
 	public static RegistroVacina registroVacinaLogado = new RegistroVacina();
@@ -65,7 +65,7 @@ public class mainTelas extends Application {
 				break;
 			case "status":
 				try {
-					fxmlStatus = FXMLLoader.load(mainTelas.class.getResource("/ruraldevs/gui/fxml/statussample.fxml"));
+					fxmlStatus = FXMLLoader.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/statussample.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

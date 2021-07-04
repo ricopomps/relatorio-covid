@@ -11,46 +11,46 @@ import javafx.scene.control.TextField;
 import ruraldevs.beans.Pessoa;
 import ruraldevs.beans.RegistroVacina;
 
-public class loginController {
+public class LoginController {
 	@FXML
-	Button bttnlogin;
+	Button bttnLogin;
 	@FXML
-	Button bttndados;
+	Button bttnDados;
 	@FXML
-	Hyperlink bttncadas;
+	Hyperlink bttnCadas;
 	@FXML
 	TextField login;
 	@FXML
 	PasswordField senha;
 
 	@FXML
-	public void bttnlognpressed(ActionEvent event) {
+	public void bttnLoginPressed(ActionEvent event) {
 		if (login(login.getText(), senha.getText())) {
 			return;
 		}
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Usuario ou senha incorretos");
 		alert.setHeaderText("Dados vazios ou incorretos");
-		alert.setContentText("Por favor, preencha os campos novamente com as informa��es corretas.");
+		alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
 		alert.showAndWait();
 	}
 
 	private boolean login(String cpf, String senha) {
-		for (Pessoa pessoa : mainTelas.pessoaController.getPessoas()) {
+		for (Pessoa pessoa : MainTelas.pessoaController.getPessoas()) {
 			if (pessoa.getCpf().equals(cpf)) {
 				if (pessoa.getSenha().equals(senha)) {
 					System.out.println("entrou");
-					mainTelas.pessoaLogada = pessoa;
-					System.out.println(mainTelas.registroController.getRegistrosVacinas());
-					System.out.println(mainTelas.pessoaController.getPessoas());
-					for (RegistroVacina registro : mainTelas.registroController.getRegistrosVacinas()) {
+					MainTelas.pessoaLogada = pessoa;
+					System.out.println(MainTelas.registroController.getRegistrosVacinas());
+					System.out.println(MainTelas.pessoaController.getPessoas());
+					for (RegistroVacina registro : MainTelas.registroController.getRegistrosVacinas()) {
 						System.out.println("aa");
 						if (pessoa.equals(registro.getPessoa())) {
-							mainTelas.registroVacinaLogado = registro;
+							MainTelas.registroVacinaLogado = registro;
 							System.out.println("foi");
-							mainTelas.changeScreen("status");
+							MainTelas.changeScreen("status");
 						} else {
-							mainTelas.changeScreen("agenda");
+							MainTelas.changeScreen("agenda");
 							System.out.println("n foi");
 						}
 					}
@@ -62,13 +62,12 @@ public class loginController {
 	}
 
 	@FXML
-	public void bttncadaspressed(ActionEvent event) {
-		mainTelas.changeScreen("cadas");
+	public void bttnCadasPressed(ActionEvent event) {
+		MainTelas.changeScreen("cadas");
 	}
 
 	@FXML
-	public void bttndadospressed(ActionEvent event) {
-		mainTelas.changeScreen("dados");
-		System.out.println("dados");
+	public void bttnDadosPressed(ActionEvent event) {
+		MainTelas.changeScreen("dados");
 	}
 }

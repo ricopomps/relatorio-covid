@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.cadasController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.CadastroController">
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -23,12 +23,12 @@
                   <Image url="@../assets/cadastro.png" />
                </image>
             </ImageView>
-          <Button fx:id="bttncadas" layoutX="974.0" layoutY="539.0" mnemonicParsing="false" onAction="#bttncadaspressed" prefHeight="14.0" prefWidth="90.0" text="CADASTRAR" />
-            <TextField fx:id="cxnome" layoutX="945.0" layoutY="189.0" prefHeight="32.0" prefWidth="154.0" />
-            <TextField fx:id="cxcpf" layoutX="943.0" layoutY="286.0" prefHeight="32.0" prefWidth="154.0" />
-            <PasswordField fx:id="cxsenha" layoutX="942.0" layoutY="454.0" prefHeight="32.0" prefWidth="154.0" />
-            <DatePicker fx:id="datanasc" layoutX="947.0" layoutY="362.0" prefHeight="33.0" prefWidth="154.0" />
-            <Hyperlink fx:id="bttnvoltar" layoutX="24.0" layoutY="25.0" onAction="#bttnvoltarpressed">
+          <Button fx:id="bttnCadas" layoutX="974.0" layoutY="539.0" mnemonicParsing="false" onAction="#bttncadaspressed" prefHeight="14.0" prefWidth="90.0" text="CADASTRAR" />
+            <TextField fx:id="cxNome" layoutX="945.0" layoutY="189.0" prefHeight="32.0" prefWidth="154.0" />
+            <TextField fx:id="cxCpf" layoutX="943.0" layoutY="286.0" prefHeight="32.0" prefWidth="154.0" />
+            <PasswordField fx:id="cxSenha" layoutX="942.0" layoutY="454.0" prefHeight="32.0" prefWidth="154.0" />
+            <DatePicker fx:id="dataNasc" layoutX="947.0" layoutY="362.0" prefHeight="33.0" prefWidth="154.0" />
+            <Hyperlink fx:id="bttnVoltar" layoutX="24.0" layoutY="25.0" onAction="#bttnvoltarpressed">
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="25.0">
                      <image>

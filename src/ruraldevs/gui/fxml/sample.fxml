@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.loginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.LoginController">
    <top>
       <AnchorPane prefHeight="654.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,11 +18,11 @@
                   <Image url="@../assets/login.png" />
                </image>
             </ImageView>
-            <Hyperlink fx:id="bttncadas" layoutX="1258.0" layoutY="36.0" onAction="#bttncadaspressed" text="Cadastrar" textFill="WHITE" />
-            <Button fx:id="bttnlogin" layoutX="1141.0" layoutY="365.0" mnemonicParsing="false" onAction="#bttnlognpressed" prefHeight="29.0" prefWidth="60.0" text="Login" />
-            <TextField fx:id="login" layoutX="1100.0" layoutY="251.0" prefHeight="22.0" prefWidth="143.0" promptText="Username" />
-            <PasswordField fx:id="senha" layoutX="1100.0" layoutY="300.0" prefHeight="25.0" prefWidth="143.0" promptText="Password" />
-            <Button fx:id="bttndados" layoutX="272.0" layoutY="474.0" mnemonicParsing="false" onAction="#bttndadospressed" text="ESTATISTICAS" />
+            <Hyperlink fx:id="bttnCadas" layoutX="1258.0" layoutY="36.0" onAction="#bttnCadasPressed" text="Cadastrar" textFill="WHITE" />
+            <Button fx:id="bttnLogin" layoutX="1141.0" layoutY="365.0" mnemonicParsing="false" onAction="#bttnLoginPressed" prefHeight="29.0" prefWidth="60.0" text="Login" />
+            <TextField fx:id="login" layoutX="1100.0" layoutY="251.0" prefHeight="22.0" prefWidth="143.0" promptText="CPF" />
+            <PasswordField fx:id="senha" layoutX="1100.0" layoutY="300.0" prefHeight="25.0" prefWidth="143.0" promptText="Senha" />
+            <Button fx:id="bttnDados" layoutX="272.0" layoutY="474.0" mnemonicParsing="false" onAction="#bttnDadosPressed" text="ESTATISTICAS" />
          </children>
       </AnchorPane>
    </top>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1349.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.statusController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1349.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.StatusController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -16,31 +16,31 @@
                   <Image url="@../assets/status.png" />
                </image>
             </ImageView>
-            <Label fx:id="nomelabel" layoutX="110.0" layoutY="192.0" textFill="#fffdfd">
+            <Label fx:id="nomeLabel" layoutX="110.0" layoutY="192.0" textFill="#fffdfd">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="cpflabel" layoutX="89.0" layoutY="276.0" textFill="WHITE">
+            <Label fx:id="cpfLabel" layoutX="89.0" layoutY="276.0" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="vacinalabel" layoutX="698.0" layoutY="179.0">
+            <Label fx:id="vacinaLabel" layoutX="698.0" layoutY="179.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="datalabel" layoutX="788.0" layoutY="249.0">
+            <Label fx:id="dataLabel" layoutX="788.0" layoutY="249.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="locallabel" layoutX="689.0" layoutY="322.0">
+            <Label fx:id="localLabel" layoutX="689.0" layoutY="322.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="doselabel" layoutX="670.0" layoutY="391.0">
+            <Label fx:id="doseLabel" layoutX="670.0" layoutY="391.0">
                <font>
                   <Font size="24.0" />
                </font></Label>
-            <Label fx:id="datanasclabel" layoutX="265.0" layoutY="335.0" textFill="WHITE">
+            <Label fx:id="dataNascLabel" layoutX="265.0" layoutY="335.0" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Label>

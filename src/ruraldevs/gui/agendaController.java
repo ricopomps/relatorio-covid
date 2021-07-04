@@ -28,26 +28,26 @@ import ruraldevs.beans.RegistroVacina;
 import ruraldevs.beans.Vacina;
 import ruraldevs.beans.VacinasEnum;
 
-public class agendaController implements Initializable {
+public class AgendaController implements Initializable {
 	public static int a = 0;
 	@FXML
-	Hyperlink voltarbttn;
+	Hyperlink voltarBttn;
 	@FXML
-	TextField cidadefield;
+	TextField cidadeField;
 	@FXML
-	TextField ceptext;
+	TextField cepText;
 	@FXML
-	Button bttnagendar;
+	Button bttnAgendar;
 	@FXML
 	DatePicker dtVac;
 	@FXML
-	ChoiceBox<GrupoEnum> gruposelect = new ChoiceBox<>();
+	ChoiceBox<GrupoEnum> grupoSelect = new ChoiceBox<>();
 	@FXML
-	ChoiceBox<EstadosEnum> ufselect = new ChoiceBox<>();
+	ChoiceBox<EstadosEnum> ufSelect = new ChoiceBox<>();
 
 	@FXML
 	public void voltarpressed(ActionEvent event) {
-		mainTelas.changeScreen("main");
+		MainTelas.changeScreen("main");
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class agendaController implements Initializable {
 		};
 		dtVac.setDayCellFactory(dayCellFactory);
 
-		gruposelect.setItems(FXCollections.observableArrayList(GrupoEnum.values()));
-		ufselect.setItems(FXCollections.observableArrayList(EstadosEnum.values()));
+		grupoSelect.setItems(FXCollections.observableArrayList(GrupoEnum.values()));
+		ufSelect.setItems(FXCollections.observableArrayList(EstadosEnum.values()));
 	}
 
 	private static final List<VacinasEnum> VALUES = Collections.unmodifiableList(Arrays.asList(VacinasEnum.values()));
@@ -83,9 +83,9 @@ public class agendaController implements Initializable {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Dados incompletos");
 		alert.setHeaderText("Dados vazios ou incorretos");
-		alert.setContentText("Por favor, preencha os campos novamente com as informa��es corretas.");
+		alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
 		try {
-			if (cidadefield.getText().isEmpty() || ceptext.getText().isEmpty() || dtVac.getValue().equals(null) || gruposelect.getValue().equals(null) || ufselect.getValue().equals(null)) {
+			if (cidadeField.getText().isEmpty() || cepText.getText().isEmpty() || dtVac.getValue().equals(null) || grupoSelect.getValue().equals(null) || ufSelect.getValue().equals(null)) {
 				alert.showAndWait();
 				return;
 			}
@@ -98,16 +98,16 @@ public class agendaController implements Initializable {
 		Endereco EndVac = new Endereco();
 		Vacina Vac = new Vacina();
 		Vac.setNomeVacina(random());
-		EndVac.setCidade(cidadefield.getText());
-		EndVac.setEstado(ufselect.getValue());
+		EndVac.setCidade(cidadeField.getText());
+		EndVac.setEstado(ufSelect.getValue());
 		LocalVac.setEnderecoVacina(EndVac);
-		RegistroVacina cadastro = new RegistroVacina(mainTelas.pessoaLogada, Vac, dtVac.getValue(), LocalVac, gruposelect.getValue());
-		mainTelas.registroVacinaLogado = cadastro;
-		mainTelas.registroController.addRegistroVacina(cadastro);
-		mainTelas.registroVacinaLogado.setDose(0);
-		mainTelas.registroController.salvarArquivo();
+		RegistroVacina cadastro = new RegistroVacina(MainTelas.pessoaLogada, Vac, dtVac.getValue(), LocalVac, grupoSelect.getValue());
+		MainTelas.registroVacinaLogado = cadastro;
+		MainTelas.registroController.addRegistroVacina(cadastro);
+		MainTelas.registroVacinaLogado.setDose(0);
+		MainTelas.registroController.salvarArquivo();
 
-		mainTelas.changeScreen("status");
+		MainTelas.changeScreen("status");
 		System.out.println(cadastro);
 	}
 }

@@ -7,42 +7,42 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class statusController implements Initializable {
+public class StatusController implements Initializable {
 	@FXML
-	Label nomelabel;
+	Label nomeLabel;
 	@FXML
-	Label cpflabel;
+	Label cpfLabel;
 	@FXML
-	Label datalabel;
+	Label dataLabel;
 	@FXML
-	Label datanasclabel;
+	Label dataNascLabel;
 	@FXML
-	Label locallabel;
+	Label localLabel;
 	@FXML
-	Label doselabel;
+	Label doseLabel;
 	@FXML
-	Label vacinalabel;
+	Label vacinaLabel;
 
 	public void showData() {
-		mainTelas.registroVacinaLogado.setDose(1);
+		MainTelas.registroVacinaLogado.setDose(1);
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-		String data1 = mainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
-		String data2 = mainTelas.pessoaLogada.getDataNascimento().format(formatter);
+		String data1 = MainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
+		String data2 = MainTelas.pessoaLogada.getDataNascimento().format(formatter);
 
-		nomelabel.setText(mainTelas.pessoaLogada.getNome());
+		nomeLabel.setText(MainTelas.pessoaLogada.getNome());
 
-		cpflabel.setText(mainTelas.pessoaLogada.getCpf());
+		cpfLabel.setText(MainTelas.pessoaLogada.getCpf());
 
-		datanasclabel.setText(data2);
+		dataNascLabel.setText(data2);
 
-		vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
+		vacinaLabel.setText(MainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
 
-		datalabel.setText(data1);
+		dataLabel.setText(data1);
 
-		locallabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
+		localLabel.setText(MainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
 
-		doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
+		doseLabel.setText(Integer.toString(MainTelas.registroVacinaLogado.getDose()));
 	}
 
 	@Override
