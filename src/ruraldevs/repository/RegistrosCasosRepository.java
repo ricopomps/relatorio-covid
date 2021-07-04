@@ -56,9 +56,6 @@ public class RegistrosCasosRepository implements Serializable {
     }
 
     private static void lerDoArquivo() {
-        long startTime = System.nanoTime();
-
-        System.out.println("COMEÇOU AGORA");
         Path path = Paths.get("./src/ruraldevs/data/caso_full.csv");
         instance = new RegistrosCasosRepository();
         try (BufferedReader bReader = Files.newBufferedReader(path)) {
@@ -98,10 +95,8 @@ public class RegistrosCasosRepository implements Serializable {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        System.out.println("TERMINOU AGORA");
-        long elapsedTime = System.nanoTime() - startTime;
-        System.out.println("Total execution time to create 1000K objects in Java in millis: " + elapsedTime / 1000000);
     }
+
 
     public List<RegistroCasos> filtrarPorEstado(EstadosEnum estado, LocalDate dataInicial, LocalDate dataFinal) throws DadosNaoEncontradosException {
         List<RegistroCasos> novaLista = new ArrayList<>();
