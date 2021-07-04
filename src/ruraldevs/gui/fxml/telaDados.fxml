@@ -64,7 +64,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <LineChart fx:id="chartTotalCasos" title="TOTAL DE CASOS CONFIRMADOS" GridPane.columnIndex="1">
+                        <LineChart fx:id="chartTotalCasos" animated="false" title="TOTAL DE CASOS CONFIRMADOS" GridPane.columnIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -72,7 +72,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <BarChart fx:id="chartNovasMortes" title="NOVAS MORTES" GridPane.rowIndex="1">
+                        <BarChart fx:id="chartNovasMortes" animated="false" title="NOVAS MORTES" GridPane.rowIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -80,7 +80,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <LineChart fx:id="chartTotalMortes" title="TOTAL DE MORTES" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <LineChart fx:id="chartTotalMortes" animated="false" title="TOTAL DE MORTES" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

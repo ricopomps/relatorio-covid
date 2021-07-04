@@ -61,6 +61,11 @@ public class TelaDadosController implements Initializable {
 	private LocalDate dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 	private static Scene telaSelecionarDataScene;
 
+	private XYChart.Series<String, Number> novosCasosSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> totalCasosSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> novasMortesSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> totalMortesSeries = new XYChart.Series<String, Number>();
+
 	@FXML
 	public void calcularPeriodo() {
 		switch (comboBPeriodo.getValue()) {
@@ -106,19 +111,10 @@ public class TelaDadosController implements Initializable {
 	@FXML
 	public void carregarGraficos() {
 		try {
-			chartNovosCasos.getData().clear();
-			chartTotalCasos.getData().clear();
-			chartNovasMortes.getData().clear();
-			chartTotalMortes.getData().clear();
-
-			XYChart.Series<String, Number> novosCasosSeries = new XYChart.Series<String, Number>();
-			novosCasosSeries.setName("Número de casos");
-			XYChart.Series<String, Number> totalCasosSeries = new XYChart.Series<String, Number>();
-			totalCasosSeries.setName("Número total de casos");
-			XYChart.Series<String, Number> novasMortesSeries = new XYChart.Series<String, Number>();
-			novasMortesSeries.setName("Número de mortes");
-			XYChart.Series<String, Number> totalMortesSeries = new XYChart.Series<String, Number>();
-			totalMortesSeries.setName("Número total de mortes");
+			novosCasosSeries.getData().clear();
+			totalCasosSeries.getData().clear();
+			novasMortesSeries.getData().clear();
+			totalMortesSeries.getData().clear();
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
@@ -130,10 +126,6 @@ public class TelaDadosController implements Initializable {
 				novasMortesSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovasMortes()));
 				totalMortesSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroTotalDeMortes()));
 			}
-			chartNovosCasos.getData().add(novosCasosSeries);
-			chartTotalCasos.getData().add(totalCasosSeries);
-			chartNovasMortes.getData().add(novasMortesSeries);
-			chartTotalMortes.getData().add(totalMortesSeries);
 
 			lblLastDate.setText(String.format("Última informação recebida na data: %s", formatter.format(this.getLastDate(listaRegistrosCasos))));
 
@@ -221,5 +213,13 @@ public class TelaDadosController implements Initializable {
 		comboBPeriodo.getItems().addAll(opcoesPeriodo);
 		comboBPeriodo.setValue("1 Semana");
 		comboBEstados.getItems().addAll(EstadosEnum.values());
+		novosCasosSeries.setName("Número de casos");
+		totalCasosSeries.setName("Número total de casos");
+		novasMortesSeries.setName("Número de mortes");
+		totalMortesSeries.setName("Número total de mortes");
+		chartNovosCasos.getData().add(novosCasosSeries);
+		chartTotalCasos.getData().add(totalCasosSeries);
+		chartNovasMortes.getData().add(novasMortesSeries);
+		chartTotalMortes.getData().add(totalMortesSeries);
 	}
 }
