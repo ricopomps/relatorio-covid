@@ -24,7 +24,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -33,6 +32,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ruraldevs.beans.EstadosEnum;
 import ruraldevs.beans.RegistroCasos;
+import ruraldevs.exceptions.DadosNaoEncontradosException;
 import ruraldevs.exceptions.DataInicialAposFinalException;
 
 public class TelaDadosController implements Initializable {
@@ -43,7 +43,7 @@ public class TelaDadosController implements Initializable {
 	@FXML
 	private ComboBox<String> comboBCidades;
 	@FXML
-	private ChoiceBox<String> choiceBPeriodo;
+	private ComboBox<String> comboBPeriodo;
 	@FXML
 	private Button btnCarregar;
 	@FXML
@@ -56,22 +56,28 @@ public class TelaDadosController implements Initializable {
 	private LineChart<String, Number> chartTotalMortes;
 	@FXML
 	private Label lblLastDate;
-	private LocalDate dataFinal = LocalDate.now(), dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
+
+	private LocalDate dataFinal = LocalDate.now();
+	private LocalDate dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 	private static Scene telaSelecionarDataScene;
 
 	@FXML
 	public void calcularPeriodo() {
-		switch (choiceBPeriodo.getValue()) {
+		switch (comboBPeriodo.getValue()) {
 			case "1 Semana":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 				break;
 			case "2 Semanas":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(14, ChronoUnit.DAYS);
 				break;
 			case "1 mês":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(1, ChronoUnit.MONTHS);
 				break;
 			case "Todo período":
+				dataFinal = LocalDate.now();
 				dataInicial = LocalDate.of(2020, 02, 25);
 				break;
 			case "Personalizado":
@@ -116,7 +122,7 @@ public class TelaDadosController implements Initializable {
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
-			List<RegistroCasos> listaRegistrosCasos = mainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
+			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
 
 			for (RegistroCasos registroCasos : listaRegistrosCasos) {
 				novosCasosSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovosCasos()));
@@ -139,10 +145,33 @@ public class TelaDadosController implements Initializable {
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.initOwner(stage);
 
-			alert.getDialogPane().setContentText("Você colocou a data inicial depois da final.");
 			alert.getDialogPane().setHeaderText("Datas inválidas!");
+			alert.getDialogPane().setContentText(String.format("%s\nPor favor insira datas válidas.", exception.getMessage()));
+			alert.showAndWait();
+		} catch (DadosNaoEncontradosException exception) {
+			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
+
+			Alert alert = new Alert(AlertType.WARNING, "");
+
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+
+			alert.getDialogPane().setHeaderText("Dados não encontrados!");
+			alert.getDialogPane().setContentText(exception.getMessage());
+			alert.showAndWait();
+		} catch (NullPointerException exception) {
+			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
+
+			Alert alert = new Alert(AlertType.WARNING, "");
+
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+
+			alert.getDialogPane().setHeaderText("Preencha os dados necessários!");
+			alert.getDialogPane().setContentText("Por favor, preencha pelo menos o estado para carregar os dados.");
 			alert.showAndWait();
 		}
+
 	}
 
 	public LocalDate getLastDate(List<RegistroCasos> listaRegistroCasos) {
@@ -153,16 +182,6 @@ public class TelaDadosController implements Initializable {
 			}
 		}
 		return lastDate;
-	}
-
-	public LocalDate getFirstDate(List<RegistroCasos> listaRegistroCasos) {
-		LocalDate firstDate = LocalDate.now();
-		for (int i = listaRegistroCasos.size() - 1; i >= 0; i--) {
-			if (listaRegistroCasos.get(i).getData().isBefore(firstDate)) {
-				firstDate = listaRegistroCasos.get(i).getData();
-			}
-		}
-		return firstDate;
 	}
 
 	@FXML
@@ -199,8 +218,8 @@ public class TelaDadosController implements Initializable {
 		comboBCidades.setDisable(true);
 		// comboBEstados.getItems().add("Brasil");
 		String[] opcoesPeriodo = {"1 Semana", "2 Semanas", "1 mês", "Todo período", "Personalizado"};
-		choiceBPeriodo.getItems().addAll(opcoesPeriodo);
-		choiceBPeriodo.setValue("1 Semana");
+		comboBPeriodo.getItems().addAll(opcoesPeriodo);
+		comboBPeriodo.setValue("1 Semana");
 		comboBEstados.getItems().addAll(EstadosEnum.values());
 	}
 }
