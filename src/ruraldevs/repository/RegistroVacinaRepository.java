@@ -44,7 +44,7 @@ public class RegistroVacinaRepository extends GenericRepository<RegistroVacina> 
 	private static RegistroVacinaRepository lerDoArquivo() {
 		RegistroVacinaRepository instanciaLocal = null;
 
-		File in = new File("registro.dat");
+		File in = new File("./src/ruraldevs/data/registro.dat");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -69,7 +69,7 @@ public class RegistroVacinaRepository extends GenericRepository<RegistroVacina> 
 		if (instance == null) {
 			return;
 		}
-		File out = new File("registro.dat");
+		File out = new File("./src/ruraldevs/data/registro.dat");
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 
