@@ -1,10 +1,11 @@
 package ruraldevs.beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Pessoa {
-
+public class Pessoa implements Serializable {
+	private static final long serialVersionUID = -5693220363739347295L;
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
