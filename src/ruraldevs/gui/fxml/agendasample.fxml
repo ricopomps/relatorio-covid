@@ -2,8 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -20,17 +22,19 @@
                   <Image url="@../assets/agendamento2.png" />
                </image>
             </ImageView>
-            <ChoiceBox fx:id="grupoSelect" layoutX="1067.0" layoutY="377.0" prefHeight="41.0" prefWidth="174.0" />
-            <ChoiceBox fx:id="ufSelect" layoutX="1067.0" layoutY="187.0" prefHeight="41.0" prefWidth="174.0" />
-            <TextField fx:id="cidadeField" layoutX="1067.0" layoutY="253.0" prefHeight="41.0" prefWidth="174.0" />
-            <TextField fx:id="cepText" layoutX="1067.0" layoutY="315.0" prefHeight="41.0" prefWidth="174.0" />
-            <DatePicker fx:id="dtVac" layoutX="1067.0" layoutY="434.0" prefHeight="36.0" prefWidth="174.0" />
-            <Button fx:id="bttnAgendar" layoutX="1092.0" layoutY="560.0" mnemonicParsing="false" onAction="#bttnagendarpressed" prefHeight="41.0" prefWidth="156.0" text="Agendar" />
+            <ChoiceBox fx:id="gruposelect" layoutX="1010.0" layoutY="177.0" prefHeight="41.0" prefWidth="174.0" />
+            <TextField fx:id="ceptext" layoutX="612.0" layoutY="357.0" prefHeight="41.0" prefWidth="174.0" text="     -  " />
+            <DatePicker fx:id="dtVac" layoutX="1010.0" layoutY="257.0" prefHeight="36.0" prefWidth="174.0" />
+            <Button fx:id="bttnagendar" layoutX="1128.0" layoutY="536.0" mnemonicParsing="false" onAction="#bttnagendarpressed" prefHeight="32.0" prefWidth="142.0" text="Agendar" />
+            <ComboBox fx:id="ufselect" layoutX="612.0" layoutY="177.0" onAction="#preencherCidades" prefHeight="40.0" prefWidth="173.0" />
+            <ComboBox fx:id="cidadeselect" layoutX="612.0" layoutY="275.0" onAction="#preencherCentros" prefHeight="40.0" prefWidth="173.0" />
+            <ComboBox fx:id="centros" layoutX="613.0" layoutY="441.0" prefHeight="38.0" prefWidth="171.0" />
+            <RadioButton fx:id="driveselect" layoutX="612.0" layoutY="503.0" mnemonicParsing="false" onAction="#preencherDrives" text="DRIVE-THRU " />
          </children>
       </AnchorPane>
    </right>
    <left>
-      <ScrollPane prefHeight="1100.0" prefWidth="481.0" BorderPane.alignment="CENTER">
+      <ScrollPane hbarPolicy="NEVER" hvalue="0.52" prefHeight="1100.0" prefWidth="481.0" vbarPolicy="ALWAYS" vvalue="0.01" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="481.0">
                <children>
@@ -39,7 +43,7 @@
                         <Image url="@../assets/agendamento1.png" />
                      </image>
                   </ImageView>
-                  <Hyperlink fx:id="voltarBttn" layoutX="7.0" layoutY="14.0" onAction="#voltarpressed" prefHeight="40.0" prefWidth="34.0">
+                  <Hyperlink fx:id="voltarbttn" layoutX="7.0" layoutY="14.0" onAction="#voltarpressed" prefHeight="40.0" prefWidth="34.0">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0">
                            <image>
