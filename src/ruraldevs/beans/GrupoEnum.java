@@ -1,7 +1,7 @@
 package ruraldevs.beans;
 
 public enum GrupoEnum {
-	PESSOAS_43_OU_MAIS("Pesssoas com 43 anos ou mais"),
+	PESSOAS_37_OU_MAIS("Pesssoas com 37 anos ou mais"),
 	TRABALHADORES_INDUSTRIAIS("Trabalhadores Industriais"),
 	TRABALHADORES_A_S("Trabalhadores da assistência social"),
 	CAMINHONEIROS("Caminhoneiros"),
