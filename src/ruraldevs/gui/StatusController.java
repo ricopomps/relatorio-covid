@@ -8,72 +8,61 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 public class StatusController implements Initializable {
+    @FXML
+    Label nomelabel;
+    @FXML
+    Label cpflabel;
+    @FXML
+    Label datalabel;
+    @FXML
+    Label datanasclabel;
+    @FXML
+    Label cidadelabel;
+    @FXML
+    Label ceplabel;
+    @FXML
+    Label grupolabel;
+    @FXML
+    Label estadolabel;
+    @FXML
+    Label postolabel;
+    @FXML
+    Label doselabel;
+    @FXML
+    Label vacinalabel;
 
-  @FXML
-  Label nomelabel;
-  @FXML
-  Label cpflabel;
-  @FXML
-  Label datalabel;
-  @FXML
-  Label datanasclabel;
-  @FXML
-  Label cidadelabel;
-  @FXML
-  Label ceplabel;
-  @FXML
-  Label grupolabel;
-  @FXML
-  Label estadolabel;
-  @FXML
-  Label postolabel;
-  @FXML
-  Label doselabel;
-  @FXML
-  Label vacinalabel;
+    public void showData() {
+        MainTelas.registroVacinaLogado.setDose(1);
 
-  public void showData() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+        String data1 = MainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
+        String data2 = MainTelas.pessoaLogada.getDataNascimento().format(formatter);
 
-	  
-      mainTelas.registroVacinaLogado.setDose(1);
-    
+        nomelabel.setText(MainTelas.pessoaLogada.getNome());
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-    String data1 = mainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
-    String data2 = mainTelas.pessoaLogada.getDataNascimento().format(formatter);
+        cpflabel.setText(MainTelas.pessoaLogada.getCpf());
 
-    nomelabel.setText(mainTelas.pessoaLogada.getNome());
+        datanasclabel.setText(data2);
 
-    cpflabel.setText(mainTelas.pessoaLogada.getCpf());
+        vacinalabel.setText(MainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
 
-    datanasclabel.setText(data2);
+        datalabel.setText(data1);
 
-    vacinalabel.setText(mainTelas.registroVacinaLogado.getVacina().getNomeVacina().toString());
+        cidadelabel.setText(MainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
 
-    datalabel.setText(data1);
+        doselabel.setText(Integer.toString(MainTelas.registroVacinaLogado.getDose()));
 
-    cidadelabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCidade());
+        grupolabel.setText(MainTelas.pessoaLogada.getGrupo().toString());
 
-    doselabel.setText(Integer.toString(mainTelas.registroVacinaLogado.getDose()));
-    
-    grupolabel.setText(mainTelas.pessoaLogada.getGrupo().toString());
-    
-    ceplabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCep());
-    
-    estadolabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getEstado().toString());
-    
-    postolabel.setText(mainTelas.registroVacinaLogado.getLocalVacina().getPostoVacinacao());
-  }
+        ceplabel.setText(MainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getCep());
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    contentSelect();
-    
+        estadolabel.setText(MainTelas.registroVacinaLogado.getLocalVacina().getEnderecoVacina().getEstado().toString());
 
-  }
-  private void contentSelect() {
-    showData();
+        postolabel.setText(MainTelas.registroVacinaLogado.getLocalVacina().getPostoVacinacao());
+    }
 
-  }
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        showData();
+    }
 }
