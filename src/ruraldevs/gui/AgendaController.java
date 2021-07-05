@@ -71,6 +71,33 @@ public class AgendaController implements Initializable {
         MainTelas.changeScreen("main");
     }
 
+     public static void cepField(TextField textField) { 
+	  maxField(textField, 9);
+	    textField.lengthProperty().addListener(new ChangeListener<Number>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+	            if (newValue.intValue() < 11) {
+	                String value = textField.getText();
+	                value = value.replaceAll("[^0-9]", "");
+	                value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
+	                textField.setText(value);
+	                
+	            }
+	          
+	            
+	        }
+	    });}
+	
+  private static void maxField(final TextField textField, final Integer length) {
+	    textField.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+	            if (newValue.length() > length)
+	                textField.setText(oldValue);
+	        }
+	    });
+	}
+	
     @FXML
     public void preencherDrives(ActionEvent event) {
         if (driveselect.isSelected()) {
@@ -145,7 +172,7 @@ public class AgendaController implements Initializable {
             }
         };
         dtVac.setDayCellFactory(dayCellFactory);
-
+        cepField(ceptext);
         gruposelect.setItems(FXCollections.observableArrayList(GrupoEnum.values()));
         ufselect.setItems(FXCollections.observableArrayList(EstadosEnum.values()));
     }
@@ -164,6 +191,12 @@ public class AgendaController implements Initializable {
         alert.setTitle("Dados incompletos");
         alert.setHeaderText("Dados vazios ou incorretos");
         alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
+        
+        Alert alerta = new Alert(AlertType.ERROR);
+	  	alerta.setTitle("Idade Insuficiente");
+	  	alerta.setHeaderText("A idade informada não condiz com a idade do grupo atual");
+	  	alerta.setContentText("Por favor, verifique as informações em relação aos grupos selecionados para a vacinação"); 
+        
         try {
             if (cidadeselect.getValue().equals(null) || ceptext.getText().isEmpty() || dtVac.getValue().equals(null) || gruposelect.getValue().equals(null) || ufselect.getValue().equals(null)) {
                 alert.showAndWait();
@@ -174,6 +207,12 @@ public class AgendaController implements Initializable {
             return;
         }
         MainTelas.pessoaLogada.setGrupo(gruposelect.getValue());
+        
+        if( mainTelas.pessoaLogada.getGrupo().equals(GrupoEnum.pessoas37mais) && mainTelas.pessoaLogada.calcularIdade()<37) {
+		alerta.showAndWait();
+		return;
+	    }
+        
         LocalVacina LocalVac = new LocalVacina();
         Endereco EndVac = new Endereco();
         Vacina Vac = new Vacina();
