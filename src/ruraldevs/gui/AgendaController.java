@@ -30,8 +30,6 @@ import ruraldevs.beans.VacinasEnum;
 
 public class AgendaController implements Initializable {
 
-  private static ArrayList<String> centroarray=new ArrayList<String>();
-  private static ArrayList<String> drivearray=new ArrayList<String>();
   public static int a = 0;
   @FXML
   Hyperlink voltarbttn;
