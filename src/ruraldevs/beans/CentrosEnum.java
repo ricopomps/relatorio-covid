@@ -1,21 +1,28 @@
-package beans;
+package ruraldevs.beans;
+
 import java.util.ArrayList;
 
 
-public enum CentrosEnum { compaz("Compaz Ariano Suassuna(Cordeiro)"),dncos("DNCOS(Tamarineira"),geraldao("Geraldao(Imbiribeira)"),pqMac("Parque da Macaxeira(Macaxeira)")
-	,pqAni("Parque de Exposição(Cordeiro)"),ucis("UCIS(Hipódromo)"),unicap("UNICAP(Boa Vista)"),ufrpe("UFRPE(Dois Irmãos)"),upa("UPA-E(Ibura)");
+public enum CentrosEnum {
+	COMPAZ("Compaz Ariano Suassuna (Cordeiro)"),
+	DNCOS("DNCOS (Tamarineira"),
+	GERALDAO("Geraldao (Imbiribeira)"),
+	PQMAC("Parque da Macaxeira (Macaxeira)"),
+	PQANI("Parque de Exposição (Cordeiro)"),
+	UCIS("UCIS (Hipódromo)"),
+	UNICAP("UNICAP (Boa Vista)"),
+	UFRPE("UFRPE (Dois Irmãos)"),
+	UPA("UPA-E (Ibura)");
+
 	private String nomeCentro;
-	
-	
-	
+
 	CentrosEnum(String string) {
-		nomeCentro=string;
+		nomeCentro = string;
 	}
 
-	
 	@Override
-    public String toString() {
-        return nomeCentro;
+	public String toString() {
+		return nomeCentro;
 	}
 
 	public String getNomeCentro() {
@@ -23,19 +30,14 @@ public enum CentrosEnum { compaz("Compaz Ariano Suassuna(Cordeiro)"),dncos("DNCO
 	}
 
 	public static ArrayList<String> names() {
-	    
-		ArrayList<String> states= new ArrayList<String>();
+		ArrayList<String> states = new ArrayList<String>();
 		CentrosEnum arr[] = CentrosEnum.values();
 		for (CentrosEnum centrosenum : arr) {
-	
-		states.add(centrosenum.getNomeCentro());
-}
-	    
 
-	    return states;
+			states.add(centrosenum.getNomeCentro());
+		}
+		return states;
 	}
-
-	
 
 
 
