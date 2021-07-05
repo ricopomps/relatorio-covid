@@ -43,6 +43,9 @@ public class LoginController {
 					MainTelas.pessoaLogada = pessoa;
 					System.out.println(MainTelas.registroController.getRegistrosVacinas());
 					System.out.println(MainTelas.pessoaController.getPessoas());
+					if (MainTelas.registroController.getRegistrosVacinas().size() == 0) {
+						MainTelas.changeScreen("agenda");
+					}
 					for (RegistroVacina registro : MainTelas.registroController.getRegistrosVacinas()) {
 						System.out.println("aa");
 						if (pessoa.equals(registro.getPessoa())) {
