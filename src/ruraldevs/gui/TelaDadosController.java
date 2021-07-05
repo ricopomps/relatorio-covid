@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,7 +25,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -32,19 +36,22 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ruraldevs.beans.EstadosEnum;
 import ruraldevs.beans.RegistroCasos;
+import ruraldevs.exceptions.DadosNaoEncontradosException;
 import ruraldevs.exceptions.DataInicialAposFinalException;
 
 public class TelaDadosController implements Initializable {
 	@FXML
 	private BorderPane paneBorderPane;
 	@FXML
-	private ChoiceBox<EstadosEnum> choiceBEstados;
+	private ComboBox<EstadosEnum> comboBEstados;
 	@FXML
-	private ChoiceBox<String> choiceBCidades;
+	private ComboBox<String> comboBCidades;
 	@FXML
-	private ChoiceBox<String> choiceBPeriodo;
+	private ComboBox<String> comboBPeriodo;
 	@FXML
 	private Button btnCarregar;
+	@FXML
+	private Button btnCheckAtt;
 	@FXML
 	private BarChart<String, Number> chartNovosCasos;
 	@FXML
@@ -55,34 +62,60 @@ public class TelaDadosController implements Initializable {
 	private LineChart<String, Number> chartTotalMortes;
 	@FXML
 	private Label lblLastDate;
-	private LocalDate dataFinal = LocalDate.now(), dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
+	@FXML
+	private Hyperlink backButton;
+
+	private LocalDate dataFinal = LocalDate.now();
+	private LocalDate dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 	private static Scene telaSelecionarDataScene;
+
+	private XYChart.Series<String, Number> novosCasosSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> totalCasosSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> novasMortesSeries = new XYChart.Series<String, Number>();
+	private XYChart.Series<String, Number> totalMortesSeries = new XYChart.Series<String, Number>();
+
+	@FXML
+	public void backButtonPressed(ActionEvent event) {
+		MainTelas.changeScreen("main");
+		chartNovosCasos.getData().clear();
+		chartTotalCasos.getData().clear();
+		chartNovasMortes.getData().clear();
+		chartTotalMortes.getData().clear();
+	}
+
 
 	@FXML
 	public void calcularPeriodo() {
-		switch (choiceBPeriodo.getValue()) {
+		switch (comboBPeriodo.getValue()) {
 			case "1 Semana":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(7, ChronoUnit.DAYS);
 				break;
 			case "2 Semanas":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(14, ChronoUnit.DAYS);
 				break;
 			case "1 mês":
+				dataFinal = LocalDate.now();
 				dataInicial = dataFinal.minus(1, ChronoUnit.MONTHS);
 				break;
 			case "Todo período":
+				dataFinal = LocalDate.now();
 				dataInicial = LocalDate.of(2020, 02, 25);
 				break;
 			case "Personalizado":
 				try {
-					FXMLLoader fxmlTelaSelecionarData = new FXMLLoader(getClass().getResource("/ruraldevs/gui/telaSelecionarData.fxml"));
+					FXMLLoader fxmlTelaSelecionarData = new FXMLLoader(getClass().getResource("/ruraldevs/gui/fxml/telaSelecionarData.fxml"));
 					fxmlTelaSelecionarData.setController(TelaSelecionarDataController.getInstance());
 					telaSelecionarDataScene = new Scene(fxmlTelaSelecionarData.load(), 300, 200);
 					Stage stage = new Stage();
 					stage.setTitle("Selecione um período personalizado");
 					stage.setScene(telaSelecionarDataScene);
-					stage.getIcons().add(new Image("/ruraldevs/gui/icone.png"));
-					stage.show();
+					stage.getIcons().add(new Image("/ruraldevs/gui/assets/icone.png"));
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.showAndWait();
+					dataInicial = TelaSelecionarDataController.getInstance().getDatePInicial().getValue();
+					dataFinal = TelaSelecionarDataController.getInstance().getDatePFinal().getValue();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -93,32 +126,17 @@ public class TelaDadosController implements Initializable {
 		}
 	}
 
-	public void handleDatasSelecionadasEvent(DatasSelecionadasEvent event) {
-		dataInicial = event.getDataInicial();
-		dataFinal = event.getDataFinal();
-	}
-
 	@FXML
 	public void carregarGraficos() {
 		try {
-			chartNovosCasos.getData().clear();
-			chartTotalCasos.getData().clear();
-			chartNovasMortes.getData().clear();
-			chartTotalMortes.getData().clear();
-
-			XYChart.Series<String, Number> novosCasosSeries = new XYChart.Series<String, Number>();
-			novosCasosSeries.setName("Número de casos");
-			XYChart.Series<String, Number> totalCasosSeries = new XYChart.Series<String, Number>();
-			totalCasosSeries.setName("Número total de casos");
-			XYChart.Series<String, Number> novasMortesSeries = new XYChart.Series<String, Number>();
-			novasMortesSeries.setName("Número de mortes");
-			XYChart.Series<String, Number> totalMortesSeries = new XYChart.Series<String, Number>();
-			totalMortesSeries.setName("Número total de mortes");
+			novosCasosSeries.getData().clear();
+			totalCasosSeries.getData().clear();
+			novasMortesSeries.getData().clear();
+			totalMortesSeries.getData().clear();
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
-
-			List<RegistroCasos> listaRegistrosCasos = mainTelas.registrosCasosController.filtrar(choiceBEstados.getValue().getNomeEstado(), choiceBCidades.getValue(), dataInicial, dataFinal);
+			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
 
 			for (RegistroCasos registroCasos : listaRegistrosCasos) {
 				novosCasosSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovosCasos()));
@@ -126,23 +144,41 @@ public class TelaDadosController implements Initializable {
 				novasMortesSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovasMortes()));
 				totalMortesSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroTotalDeMortes()));
 			}
-			chartNovosCasos.getData().add(novosCasosSeries);
-			chartTotalCasos.getData().add(totalCasosSeries);
-			chartNovasMortes.getData().add(novasMortesSeries);
-			chartTotalMortes.getData().add(totalMortesSeries);
 
-			lblLastDate.setText(String.format("Última informação recebida na data: %s", formatter.format(this.getLastDate(listaRegistrosCasos))));
+			lblLastDate.setText(String.format("Últimas informações recebidas na data: %s", formatter.format(this.getLastDate(listaRegistrosCasos))));
 
 		} catch (DataInicialAposFinalException exception) {
 			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
 
-			Alert alert = new Alert(AlertType.ERROR, "haha");
+			Alert alert = new Alert(AlertType.ERROR, "");
 
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.initOwner(stage);
 
-			alert.getDialogPane().setContentText("Você colocou a data inicial depois da final.");
 			alert.getDialogPane().setHeaderText("Datas inválidas!");
+			alert.getDialogPane().setContentText(String.format("%s\nPor favor insira datas válidas.", exception.getMessage()));
+			alert.showAndWait();
+		} catch (DadosNaoEncontradosException exception) {
+			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
+
+			Alert alert = new Alert(AlertType.WARNING, "");
+
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+
+			alert.getDialogPane().setHeaderText("Dados não encontrados!");
+			alert.getDialogPane().setContentText(exception.getMessage());
+			alert.showAndWait();
+		} catch (NullPointerException exception) {
+			Stage stage = (Stage) paneBorderPane.getScene().getWindow();
+
+			Alert alert = new Alert(AlertType.WARNING, "");
+
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+
+			alert.getDialogPane().setHeaderText("Preencha os dados necessários!");
+			alert.getDialogPane().setContentText("Por favor, preencha pelo menos o estado para carregar os dados.");
 			alert.showAndWait();
 		}
 	}
@@ -157,6 +193,35 @@ public class TelaDadosController implements Initializable {
 		return lastDate;
 	}
 
+	@FXML
+	public void checarAtualizacoes() {
+		Stage stage = (Stage) paneBorderPane.getScene().getWindow();
+
+		if (MainTelas.registrosCasosController.checarAtualizacoes()) {
+			ButtonType sim = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
+			ButtonType nao = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+			Alert alert = new Alert(AlertType.WARNING, "", sim, nao);
+
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+
+			alert.getDialogPane().setHeaderText("Há uma nova atualização!");
+			alert.getDialogPane().setContentText("Há uma nova atualização dos dados, deseja baixar?");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == sim) {
+				MainTelas.registrosCasosController.atualizarDados();
+			}
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION, "", ButtonType.OK);
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.initOwner(stage);
+			alert.getDialogPane().setHeaderText("Não há uma nova atualização!");
+			alert.getDialogPane().setContentText("Não há nenhuma nova atualização dos dados!");
+			alert.showAndWait();
+		}
+	}
+
 	public LocalDate getFirstDate(List<RegistroCasos> listaRegistroCasos) {
 		LocalDate firstDate = LocalDate.now();
 		for (int i = listaRegistroCasos.size() - 1; i >= 0; i--) {
@@ -169,20 +234,20 @@ public class TelaDadosController implements Initializable {
 
 	@FXML
 	public void preencherCidades(ActionEvent event) {
-		EstadosEnum estado = choiceBEstados.getValue();
+		EstadosEnum estado = comboBEstados.getValue();
 		if (estado.equals("Brasil")) {
 			return;
 		}
-		choiceBCidades.getItems().clear();
-		choiceBCidades.setDisable(false);
-		choiceBCidades.getItems().add(null);
+		comboBCidades.getItems().clear();
+		comboBCidades.setDisable(false);
+		comboBCidades.getItems().add(null);
 		JSONParser parser = new JSONParser();
 		try (FileReader reader = new FileReader(String.format("./src/ruraldevs/data/estados/%s.json", estado.name()))) {
 			try {
 				Object obj = parser.parse(reader);
 				JSONObject estadoJson = (JSONObject) obj;
 				JSONArray cidadesArray = (JSONArray) estadoJson.get("cidades");
-				choiceBCidades.getItems().addAll(cidadesArray);
+				comboBCidades.getItems().addAll(cidadesArray);
 			} catch (ParseException e) {
 				System.out.println("PARSE EXCEPTION");
 			}
@@ -196,14 +261,22 @@ public class TelaDadosController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		paneBorderPane.addEventFilter(DatasSelecionadasEvent.ANY, this::handleDatasSelecionadasEvent);
-		choiceBCidades.getItems().add("Escolha um estado");
-		choiceBCidades.setValue("Escolha um estado");
-		choiceBCidades.setDisable(true);
-		// cbEstados.getItems().add("Brasil");
+		comboBEstados.setPromptText("Estado");
+		comboBCidades.getItems().add("Escolha um estado");
+		comboBCidades.setValue("Escolha um estado");
+		comboBCidades.setDisable(true);
+		// comboBEstados.getItems().add("Brasil");
 		String[] opcoesPeriodo = {"1 Semana", "2 Semanas", "1 mês", "Todo período", "Personalizado"};
-		choiceBPeriodo.getItems().addAll(opcoesPeriodo);
-		choiceBPeriodo.setValue("1 Semana");
-		choiceBEstados.getItems().addAll(EstadosEnum.values());
+		comboBPeriodo.getItems().addAll(opcoesPeriodo);
+		comboBPeriodo.setValue("1 Semana");
+		comboBEstados.getItems().addAll(EstadosEnum.values());
+		novosCasosSeries.setName("Número de casos");
+		totalCasosSeries.setName("Número total de casos");
+		novasMortesSeries.setName("Número de mortes");
+		totalMortesSeries.setName("Número total de mortes");
+		chartNovosCasos.getData().add(novosCasosSeries);
+		chartTotalCasos.getData().add(totalCasosSeries);
+		chartNovasMortes.getData().add(novasMortesSeries);
+		chartTotalMortes.getData().add(totalMortesSeries);
 	}
 }

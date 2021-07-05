@@ -33,7 +33,6 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 
 	public void deletePessoa(Pessoa pessoa) {
 		this.deleteDado(pessoa);
-
 	}
 
 	public void updatePessoa(Pessoa pessoa) {
@@ -44,7 +43,7 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 	private static PessoaRepository lerDoArquivo() {
 		PessoaRepository instanciaLocal = null;
 
-		File in = new File("pessoas.dat");
+		File in = new File("./src/ruraldevs/data/pessoas.dat");
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
@@ -69,7 +68,7 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 		if (instance == null) {
 			return;
 		}
-		File out = new File("pessoas.dat");
+		File out = new File("./src/ruraldevs/data/pessoas.dat");
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 

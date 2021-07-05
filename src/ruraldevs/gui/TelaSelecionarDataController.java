@@ -34,9 +34,6 @@ public class TelaSelecionarDataController implements Initializable {
 		btnOk.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				LocalDate dataInicial = datePInicial.getValue();
-				LocalDate dataFinal = datePFinal.getValue();
-				btnOk.fireEvent(new DatasSelecionadasEvent(DatasSelecionadasEvent.SALVAR_DATAS, dataInicial, dataFinal));
 				Stage stage = (Stage) btnOk.getScene().getWindow();
 				stage.hide();
 			}

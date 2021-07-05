@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1349.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.statusController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="1350.0">
+               <image>
+                  <Image url="@../assets/status.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nomelabel" layoutX="102.0" layoutY="150.0" text="nome" textFill="#fffdfd">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="cpflabel" layoutX="83.0" layoutY="223.0" text="cpf" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="vacinalabel" layoutX="1127.0" layoutY="223.0" text="vacina">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="datalabel" layoutX="1139.0" layoutY="300.0" text="datavac">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="cidadelabel" layoutX="711.0" layoutY="295.0" text="cidadelabel">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="doselabel" layoutX="1121.0" layoutY="365.0" text="dose">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="datanasclabel" layoutX="263.0" layoutY="295.0" text="datanasc" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="ceplabel" layoutX="88.0" layoutY="365.0" text="cep" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="grupolabel" layoutX="116.0" layoutY="437.0" text="grupo" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="postolabel" layoutX="736.0" layoutY="400.0" prefHeight="60.0" prefWidth="593.0" text="posto">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="estadolabel" layoutX="718.0" layoutY="223.0" text="estado">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

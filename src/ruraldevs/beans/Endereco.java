@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Endereco implements Serializable { 
 	
-
 	private static final long serialVersionUID = -7072971503986928197L;
 	private String cidade;
 	private EstadosEnum estado;

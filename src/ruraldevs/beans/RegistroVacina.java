@@ -1,9 +1,10 @@
 package ruraldevs.beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class RegistroVacina {
+public class RegistroVacina implements Serializable {
+	private static final long serialVersionUID = -5028429473421539244L;
 	private Pessoa pessoa;
 	private Vacina vacina;
 	private int dose;

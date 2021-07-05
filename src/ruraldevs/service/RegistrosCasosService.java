@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import ruraldevs.beans.EstadosEnum;
 import ruraldevs.beans.RegistroCasos;
+import ruraldevs.exceptions.DadosNaoEncontradosException;
 import ruraldevs.exceptions.DataInicialAposFinalException;
 import ruraldevs.repository.RegistrosCasosRepository;
 
@@ -30,7 +31,7 @@ public class RegistrosCasosService {
         this.repositorio.updateDado(registroCasos);
     }
 
-    public List<RegistroCasos> filtrar(String estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DataInicialAposFinalException {
+    public List<RegistroCasos> filtrar(String estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DataInicialAposFinalException, DadosNaoEncontradosException {
         if (dataFinal.isBefore(dataInicial)) {
             throw new DataInicialAposFinalException(dataInicial, dataFinal);
         }
@@ -46,5 +47,13 @@ public class RegistrosCasosService {
         } else {
             return this.repositorio.filtrarPorEstado(estadoE, dataInicial, dataFinal);
         }
+    }
+
+    public boolean checarAtualizacoes() {
+        return this.repositorio.checarAtualizacoes();
+    }
+
+    public void atualizarDados() {
+        this.repositorio.atualizarDados();
     }
 }

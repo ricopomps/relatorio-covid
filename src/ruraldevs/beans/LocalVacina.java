@@ -3,11 +3,10 @@ package ruraldevs.beans;
 import java.io.Serializable;
 
 public class LocalVacina  implements Serializable{
-	
-	private static final long serialVersionUID = 7027419897837285917L;
 	private String postoVacinacao;
 	private Endereco enderecoVacina;
 	private boolean isDriveThru;
+	private static final long serialVersionUID = 5494810606247939645L;
 
 	public LocalVacina() {
 

@@ -3,6 +3,7 @@ package ruraldevs.controller;
 import java.time.LocalDate;
 import java.util.List;
 import ruraldevs.beans.RegistroCasos;
+import ruraldevs.exceptions.DadosNaoEncontradosException;
 import ruraldevs.exceptions.DataInicialAposFinalException;
 import ruraldevs.service.RegistrosCasosService;
 
@@ -29,8 +30,16 @@ public class RegistrosCasosController {
         this.service.updateRegistroCasos(registroCasos);
     }
 
-    public List<RegistroCasos> filtrar(String estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DataInicialAposFinalException {
+    public List<RegistroCasos> filtrar(String estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DataInicialAposFinalException, DadosNaoEncontradosException {
         return this.service.filtrar(estado, cidade, dataInicial, dataFinal);
+    }
+
+    public boolean checarAtualizacoes() {
+        return this.service.checarAtualizacoes();
+    }
+
+    public void atualizarDados() {
+        this.service.atualizarDados();
     }
 }
 

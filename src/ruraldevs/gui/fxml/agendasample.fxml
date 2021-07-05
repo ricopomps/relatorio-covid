@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruraldevs.gui.AgendaController">
+   <right>
+      <AnchorPane prefHeight="650.0" prefWidth="869.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="869.0" layoutX="474.0" layoutY="-10.0">
+               <image>
+                  <Image url="@../assets/agendamento2.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="gruposelect" layoutX="1010.0" layoutY="177.0" prefHeight="41.0" prefWidth="174.0" />
+            <TextField fx:id="ceptext" layoutX="612.0" layoutY="357.0" prefHeight="41.0" prefWidth="174.0" text="     -  " />
+            <DatePicker fx:id="dtVac" layoutX="1010.0" layoutY="257.0" prefHeight="36.0" prefWidth="174.0" />
+            <Button fx:id="bttnagendar" layoutX="1128.0" layoutY="536.0" mnemonicParsing="false" onAction="#bttnagendarpressed" prefHeight="32.0" prefWidth="142.0" text="Agendar" />
+            <ComboBox fx:id="ufselect" layoutX="612.0" layoutY="177.0" onAction="#preencherCidades" prefHeight="40.0" prefWidth="173.0" />
+            <ComboBox fx:id="cidadeselect" layoutX="612.0" layoutY="275.0" onAction="#preencherCentros" prefHeight="40.0" prefWidth="173.0" />
+            <ComboBox fx:id="centros" layoutX="613.0" layoutY="441.0" prefHeight="38.0" prefWidth="171.0" />
+            <RadioButton fx:id="driveselect" layoutX="612.0" layoutY="503.0" mnemonicParsing="false" onAction="#preencherDrives" text="DRIVE-THRU " />
+         </children>
+      </AnchorPane>
+   </right>
+   <left>
+      <ScrollPane hbarPolicy="NEVER" hvalue="0.52" prefHeight="1100.0" prefWidth="481.0" vbarPolicy="ALWAYS" vvalue="0.01" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1100.0" prefWidth="481.0">
+               <children>
+                  <ImageView fitHeight="1100.0" fitWidth="481.0">
+                     <image>
+                        <Image url="@../assets/agendamento1.png" />
+                     </image>
+                  </ImageView>
+                  <Hyperlink fx:id="voltarbttn" layoutX="7.0" layoutY="14.0" onAction="#voltarpressed" prefHeight="40.0" prefWidth="34.0">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="36.0">
+                           <image>
+                              <Image url="@../assets/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Hyperlink>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </left>
+</BorderPane>
