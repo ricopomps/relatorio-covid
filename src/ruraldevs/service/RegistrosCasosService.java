@@ -48,4 +48,12 @@ public class RegistrosCasosService {
             return this.repositorio.filtrarPorEstado(estadoE, dataInicial, dataFinal);
         }
     }
+
+    public boolean checarAtualizacoes() {
+        return this.repositorio.checarAtualizacoes();
+    }
+
+    public void atualizarDados() {
+        this.repositorio.atualizarDados();
+    }
 }

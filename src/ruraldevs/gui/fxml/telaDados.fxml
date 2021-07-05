@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -28,12 +30,12 @@
                   <Image url="@../assets/dados1.png" />
                </image>
             </ImageView>
-            <ChoiceBox fx:id="choiceBEstados" layoutX="268.0" layoutY="150.0" onAction="#preencherCidades" prefWidth="150.0" value="Estados" />
-            <ChoiceBox fx:id="choiceBPeriodo" layoutX="763.0" layoutY="150.0" onAction="#calcularPeriodo" prefWidth="150.0" />
-            <ChoiceBox fx:id="choiceBCidades" layoutX="537.0" layoutY="150.0" prefWidth="150.0" />
-            <Label layoutX="1060.0" layoutY="92.0" />
+            <ComboBox fx:id="comboBEstados" layoutX="268.0" layoutY="150.0" onAction="#preencherCidades" prefWidth="150.0" promptText="Estado" />
+            <ComboBox fx:id="comboBCidades" layoutX="537.0" layoutY="150.0" prefWidth="150.0" />
+            <ComboBox fx:id="comboBPeriodo" layoutX="763.0" layoutY="150.0" onAction="#calcularPeriodo" prefWidth="150.0" promptText="Período" />
             <Button fx:id="btnCarregar" layoutX="1007.0" layoutY="150.0" mnemonicParsing="false" onAction="#carregarGraficos" text="Carregar gráficos" />
-            <Hyperlink fx:id="backbutton" layoutX="14.0" layoutY="14.0" onAction="#backbttnprsd">
+            <Button fx:id="btnCheckAtt" layoutX="1221.0" layoutY="14.0" mnemonicParsing="false" onAction="#checarAtualizacoes" text="Checar atualização" />
+            <Hyperlink fx:id="backButton" layoutX="14.0" layoutY="14.0" onAction="#backButtonPressed">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="35.0">
                      <image>
@@ -73,7 +75,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <LineChart fx:id="chartTotalCasos" title="TOTAL DE CASOS CONFIRMADOS" GridPane.columnIndex="1">
+                        <LineChart fx:id="chartTotalCasos" animated="false" title="TOTAL DE CASOS CONFIRMADOS" GridPane.columnIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -81,7 +83,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <BarChart fx:id="chartNovasMortes" title="NOVAS MORTES" GridPane.rowIndex="1">
+                        <BarChart fx:id="chartNovasMortes" animated="false" title="NOVAS MORTES" GridPane.rowIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -89,7 +91,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <LineChart fx:id="chartTotalMortes" title="TOTAL DE MORTES" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <LineChart fx:id="chartTotalMortes" animated="false" title="TOTAL DE MORTES" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -112,4 +114,22 @@
          </content>
       </ScrollPane>
    </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="1350.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblLastDate">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </bottom>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+    
 </BorderPane>

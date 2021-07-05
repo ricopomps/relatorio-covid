@@ -33,5 +33,13 @@ public class RegistrosCasosController {
     public List<RegistroCasos> filtrar(String estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DataInicialAposFinalException, DadosNaoEncontradosException {
         return this.service.filtrar(estado, cidade, dataInicial, dataFinal);
     }
+
+    public boolean checarAtualizacoes() {
+        return this.service.checarAtualizacoes();
+    }
+
+    public void atualizarDados() {
+        this.service.atualizarDados();
+    }
 }
 
