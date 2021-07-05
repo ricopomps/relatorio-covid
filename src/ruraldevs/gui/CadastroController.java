@@ -16,79 +16,73 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import ruraldevs.beans.Pessoa;
-import ruraldevs.controller.PessoaController;
 
 public class CadastroController implements Initializable {
+    @FXML
+    Hyperlink bttnvoltar;
+    @FXML
+    Button bttncadas;
+    @FXML
+    PasswordField cxsenha;
+    @FXML
+    TextField cxnome;
+    @FXML
+    TextField cxcpf;
+    @FXML
+    DatePicker datanasc;
 
-  @FXML
-  Hyperlink bttnvoltar;
-  @FXML
-  Button bttncadas;
-  @FXML
-  PasswordField cxsenha;
-  @FXML
-  TextField cxnome;
-  @FXML
-  TextField cxcpf;
-  @FXML
-  DatePicker datanasc;
-
-  @FXML
-  public void bttnvoltarpressed(ActionEvent event) {
-    mainTelas.changeScreen("main");
-    cxnome.clear();
-    cxcpf.clear();
-    cxsenha.clear();
-  }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    Callback < DatePicker, DateCell > dayCellFactory = dp -> new DateCell() {
-      @Override
-      public void updateItem(LocalDate item, boolean empty) {
-        super.updateItem(item, empty);
-
-        if (item.isAfter(LocalDate.now())) {
-          setStyle("-fx-background-color: #EBEBEB; -fx-text-fill: darkgray;");
-          setDisable(true);
-        }
-      }
-    };
-    datanasc.setDayCellFactory(dayCellFactory);
-  }
-
-  @FXML
-  public void bttncadaspressed(ActionEvent event) throws NullPointerException {
-	  Alert alert = new Alert(AlertType.WARNING);
-  	alert.setTitle("Dados incompletos");
-  	alert.setHeaderText("Dados vazios ou incorretos");
-  	alert.setContentText("Por favor, preencha os campos novamente com as informações corretas."); 	 
-  	
-    try {
-      if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null) || cxsenha.getText().isEmpty()) {
-        System.out.println("preencha todos os dados");
-        alert.showAndWait();
-        return;
-      }
-    } catch (NullPointerException e) {
-
-    	alert.showAndWait();
-      return;
+    @FXML
+    public void bttnvoltarpressed(ActionEvent event) {
+        MainTelas.changeScreen("main");
+        cxnome.clear();
+        cxcpf.clear();
+        cxsenha.clear();
     }
-    PessoaController a = new PessoaController();
 
-    Pessoa nome = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
-    a.addPessoa(nome);
-    ((PessoaController) a).salvar();
-    mainTelas.pessoaLogada = nome;
-    System.out.println(a.getPessoas());
-    
-    cxnome.clear();
-    cxcpf.clear();
-    cxsenha.clear();
-    datanasc.setValue(null);
-    mainTelas.changeScreen("agenda");
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
 
-  }
+                if (item.isAfter(LocalDate.now())) {
+                    setStyle("-fx-background-color: #EBEBEB; -fx-text-fill: darkgray;");
+                    setDisable(true);
+                }
+            }
+        };
+        datanasc.setDayCellFactory(dayCellFactory);
+    }
 
+    @FXML
+    public void bttncadaspressed(ActionEvent event) throws NullPointerException {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Dados incompletos");
+        alert.setHeaderText("Dados vazios ou incorretos");
+        alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
+
+        try {
+            if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null) || cxsenha.getText().isEmpty()) {
+                System.out.println("preencha todos os dados");
+                alert.showAndWait();
+                return;
+            }
+        } catch (NullPointerException e) {
+            alert.showAndWait();
+            return;
+        }
+
+        Pessoa nome = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
+        MainTelas.pessoaController.addPessoa(nome);
+        MainTelas.pessoaController.salvar();
+        MainTelas.pessoaLogada = nome;
+        System.out.println(MainTelas.pessoaController.getPessoas());
+
+        cxnome.clear();
+        cxcpf.clear();
+        cxsenha.clear();
+        datanasc.setValue(null);
+        MainTelas.changeScreen("agenda");
+    }
 }
