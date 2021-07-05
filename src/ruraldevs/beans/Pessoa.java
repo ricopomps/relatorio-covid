@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Pessoa implements Serializable {
-	private static final long serialVersionUID = -5693220363739347295L;
+public class Pessoa implements Serializable{
+
+	private static final long serialVersionUID = -7599895100973516296L;
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
 	private String senha;
+	private GrupoEnum grupo;
 
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento, String senha) {
 		this.nome = nome;
@@ -18,6 +20,12 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 	}
 
+	public Pessoa(String cpf,String senha) {
+		
+		this.cpf = cpf;
+		this.senha = senha;
+	}
+	
 	public Pessoa() {}
 
 	public int calcularIdade() {
@@ -75,4 +83,20 @@ public class Pessoa implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-}
+
+
+	public GrupoEnum getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(GrupoEnum grupo) {
+		this.grupo = grupo;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", senha=" + senha
+				+ "]";
+	}}
+
+	
