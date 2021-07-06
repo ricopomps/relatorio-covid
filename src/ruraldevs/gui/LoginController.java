@@ -1,5 +1,7 @@
 package ruraldevs.gui;
 
+import java.time.LocalDate;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -49,14 +51,15 @@ public class LoginController {
 					for (RegistroVacina registro : MainTelas.registroController.getRegistrosVacinas()) {
 						System.out.println("aa");
 						if (pessoa.equals(registro.getPessoa())) {
-							MainTelas.registroVacinaLogado = registro;
-							System.out.println("foi");
-							MainTelas.changeScreen("status");
-						} else {
-							MainTelas.changeScreen("agenda");
-							System.out.println("n foi");
+							if (registro.getDataDaVacina().isAfter(LocalDate.now())) {
+								MainTelas.registroVacinaLogado = registro;
+								System.out.println("foi");
+								MainTelas.changeScreen("status");
+							}
 						}
 					}
+					MainTelas.changeScreen("agenda");
+					System.out.println("n foi");
 					return true;
 				}
 			}

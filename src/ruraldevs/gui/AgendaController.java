@@ -208,7 +208,7 @@ public class AgendaController implements Initializable {
         }
         MainTelas.pessoaLogada.setGrupo(gruposelect.getValue());
         
-        if( mainTelas.pessoaLogada.getGrupo().equals(GrupoEnum.pessoas37mais) && mainTelas.pessoaLogada.calcularIdade()<37) {
+        if( MainTelas.pessoaLogada.getGrupo().equals(GrupoEnum.pessoas37mais) && MainTelas.pessoaLogada.calcularIdade()<37) {
 		alerta.showAndWait();
 		return;
 	    }
@@ -224,9 +224,16 @@ public class AgendaController implements Initializable {
         LocalVac.setPostoVacinacao(centros.getValue());
 
         RegistroVacina cadastro = new RegistroVacina(MainTelas.pessoaLogada, Vac, dtVac.getValue(), LocalVac, gruposelect.getValue());
-        MainTelas.registroVacinaLogado = cadastro;
+        RegistroVacina cadastro2dose = new RegistroVacina(MainTelas.pessoaLogada, Vac, (LocalDate) dtVac.getValue().plusDays(90), LocalVac, gruposelect.getValue());
+        if( dtVac.getValue().isBefore(LocalDate.now()) || dtVac.getValue().isEqual(LocalDate.now())) {
+        	MainTelas.registroVacinaLogado = cadastro;        	
+        } else {
+        	MainTelas.registroVacinaLogado = cadastro2dose;       
+        }
+        cadastro.setDose(1);
+        cadastro2dose.setDose(2);
         MainTelas.registroController.addRegistroVacina(cadastro);
-        MainTelas.registroVacinaLogado.setDose(0);
+        MainTelas.registroController.addRegistroVacina(cadastro2dose);
         MainTelas.registroController.salvarArquivo();
         MainTelas.pessoaController.salvar();
 

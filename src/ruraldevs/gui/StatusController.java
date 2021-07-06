@@ -32,8 +32,6 @@ public class StatusController implements Initializable {
     Label vacinalabel;
 
     public void showData() {
-        MainTelas.registroVacinaLogado.setDose(1);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
         String data1 = MainTelas.registroVacinaLogado.getDataDaVacina().format(formatter);
         String data2 = MainTelas.pessoaLogada.getDataNascimento().format(formatter);
