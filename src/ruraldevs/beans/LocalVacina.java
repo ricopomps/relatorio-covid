@@ -2,7 +2,7 @@ package ruraldevs.beans;
 
 import java.io.Serializable;
 
-public class LocalVacina  implements Serializable{
+public class LocalVacina implements Serializable {
 	private String postoVacinacao;
 	private Endereco enderecoVacina;
 	private boolean isDriveThru;
@@ -16,6 +16,11 @@ public class LocalVacina  implements Serializable{
 		this.postoVacinacao = postoVacinacao;
 		this.enderecoVacina = enderecoVacina;
 		this.isDriveThru = isDriveThru;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("[PostoVacinacao = %s, EnderecoVacina = %s, isDriveThrue = %s]", postoVacinacao, enderecoVacina, isDriveThru);
 	}
 
 	public String getPostoVacinacao() {

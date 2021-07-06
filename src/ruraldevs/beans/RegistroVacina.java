@@ -22,6 +22,10 @@ public class RegistroVacina implements Serializable {
 
 	public RegistroVacina() {}
 
+	@Override
+	public String toString() {
+		return String.format("[Pessoa = %s, Vacina = %s, Dose = %d,Data = %s, LocalVacina = %s, Grupo = %s]", pessoa, vacina, dose, dataDaVacina, localVacina, grupo);
+	}
 
 	// GETTERS E SETTERS
 	public LocalVacina getLocalVacina() {
