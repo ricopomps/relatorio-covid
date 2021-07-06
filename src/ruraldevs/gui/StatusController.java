@@ -63,4 +63,17 @@ public class StatusController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         showData();
     }
+    
+      public void logoutbutton(ActionEvent event) {
+	  
+	  
+	  
+	  
+  }	
+public void dadosbttnpressed(ActionEvent event) {
+	  
+	 mainTelas.changeScreen("dados");
+	  
+	  
+  }	
 }
