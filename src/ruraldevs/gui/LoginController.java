@@ -31,7 +31,7 @@ public class LoginController {
 			return;
 		}
 		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Usuario ou senha incorretos");
+		alert.setTitle("Usuário ou senha incorretos");
 		alert.setHeaderText("Dados vazios ou incorretos");
 		alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
 		alert.showAndWait();
@@ -45,21 +45,25 @@ public class LoginController {
 					MainTelas.pessoaLogada = pessoa;
 					System.out.println(MainTelas.registroController.getRegistrosVacinas());
 					System.out.println(MainTelas.pessoaController.getPessoas());
+
 					if (MainTelas.registroController.getRegistrosVacinas().size() == 0) {
 						MainTelas.changeScreen("agenda");
+						return true;
 					}
+
 					for (RegistroVacina registro : MainTelas.registroController.getRegistrosVacinas()) {
-						System.out.println("aa");
+						// System.out.println("aa");
 						if (pessoa.equals(registro.getPessoa())) {
 							if (registro.getDataDaVacina().isAfter(LocalDate.now())) {
 								MainTelas.registroVacinaLogado = registro;
-								System.out.println("foi");
+								// System.out.println("foi");
 								MainTelas.changeScreen("status");
+								return true;
 							}
 						}
 					}
 					MainTelas.changeScreen("agenda");
-					System.out.println("n foi");
+					// System.out.println("n foi");
 					return true;
 				}
 			}
