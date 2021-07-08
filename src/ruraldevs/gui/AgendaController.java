@@ -14,6 +14,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,33 +73,31 @@ public class AgendaController implements Initializable {
         MainTelas.changeScreen("main");
     }
 
-     public static void cepField(TextField textField) { 
-	  maxField(textField, 9);
-	    textField.lengthProperty().addListener(new ChangeListener<Number>() {
-	        @Override
-	        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-	            if (newValue.intValue() < 11) {
-	                String value = textField.getText();
-	                value = value.replaceAll("[^0-9]", "");
-	                value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
-	                textField.setText(value);
-	                
-	            }
-	          
-	            
-	        }
-	    });}
-	
-  private static void maxField(final TextField textField, final Integer length) {
-	    textField.textProperty().addListener(new ChangeListener<String>() {
-	        @Override
-	        public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-	            if (newValue.length() > length)
-	                textField.setText(oldValue);
-	        }
-	    });
-	}
-	
+    public static void cepField(TextField textField) {
+        maxField(textField, 9);
+        textField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (newValue.intValue() < 11) {
+                    String value = textField.getText();
+                    value = value.replaceAll("[^0-9]", "");
+                    value = value.replaceFirst("(\\d{5})(\\d)", "$1-$2");
+                    textField.setText(value);
+                }
+            }
+        });
+    }
+
+    private static void maxField(final TextField textField, final Integer length) {
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (newValue.length() > length)
+                    textField.setText(oldValue);
+            }
+        });
+    }
+
     @FXML
     public void preencherDrives(ActionEvent event) {
         if (driveselect.isSelected()) {
@@ -113,9 +113,6 @@ public class AgendaController implements Initializable {
 
     public void preencherCidades(ActionEvent event) {
         EstadosEnum estado = ufselect.getValue();
-        if (estado.equals("Brasil")) {
-            return;
-        }
         cidadeselect.getItems().clear();
         cidadeselect.setDisable(false);
         cidadeselect.getItems().add(null);
@@ -191,12 +188,12 @@ public class AgendaController implements Initializable {
         alert.setTitle("Dados incompletos");
         alert.setHeaderText("Dados vazios ou incorretos");
         alert.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
-        
+
         Alert alerta = new Alert(AlertType.ERROR);
-	  	alerta.setTitle("Idade Insuficiente");
-	  	alerta.setHeaderText("A idade informada não condiz com a idade do grupo atual");
-	  	alerta.setContentText("Por favor, verifique as informações em relação aos grupos selecionados para a vacinação"); 
-        
+        alerta.setTitle("Idade Insuficiente");
+        alerta.setHeaderText("A idade informada não condiz com a idade do grupo atual");
+        alerta.setContentText("Por favor, verifique as informações em relação aos grupos selecionados para a vacinação.");
+
         try {
             if (cidadeselect.getValue().equals(null) || ceptext.getText().isEmpty() || dtVac.getValue().equals(null) || gruposelect.getValue().equals(null) || ufselect.getValue().equals(null)) {
                 alert.showAndWait();
@@ -207,12 +204,12 @@ public class AgendaController implements Initializable {
             return;
         }
         MainTelas.pessoaLogada.setGrupo(gruposelect.getValue());
-        
-        if( MainTelas.pessoaLogada.getGrupo().equals(GrupoEnum.pessoas37mais) && MainTelas.pessoaLogada.calcularIdade()<37) {
-		alerta.showAndWait();
-		return;
-	    }
-        
+
+        if (MainTelas.pessoaLogada.getGrupo().equals(GrupoEnum.PESSOAS_37_OU_MAIS) && MainTelas.pessoaLogada.calcularIdade() < 37) {
+            alerta.showAndWait();
+            return;
+        }
+
         LocalVacina LocalVac = new LocalVacina();
         Endereco EndVac = new Endereco();
         Vacina Vac = new Vacina();
@@ -225,10 +222,10 @@ public class AgendaController implements Initializable {
 
         RegistroVacina cadastro = new RegistroVacina(MainTelas.pessoaLogada, Vac, dtVac.getValue(), LocalVac, gruposelect.getValue());
         RegistroVacina cadastro2dose = new RegistroVacina(MainTelas.pessoaLogada, Vac, (LocalDate) dtVac.getValue().plusDays(90), LocalVac, gruposelect.getValue());
-        if( dtVac.getValue().isBefore(LocalDate.now()) || dtVac.getValue().isEqual(LocalDate.now())) {
-        	MainTelas.registroVacinaLogado = cadastro;        	
+        if (dtVac.getValue().isBefore(LocalDate.now()) || dtVac.getValue().isEqual(LocalDate.now())) {
+            MainTelas.registroVacinaLogado = cadastro;
         } else {
-        	MainTelas.registroVacinaLogado = cadastro2dose;       
+            MainTelas.registroVacinaLogado = cadastro2dose;
         }
         cadastro.setDose(1);
         cadastro2dose.setDose(2);
