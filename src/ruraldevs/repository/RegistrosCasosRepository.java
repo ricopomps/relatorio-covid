@@ -110,7 +110,6 @@ public class RegistrosCasosRepository implements Serializable {
         }
     }
 
-
     public List<RegistroCasos> filtrarPorEstado(EstadosEnum estado, LocalDate dataInicial, LocalDate dataFinal) throws DadosNaoEncontradosException {
         List<RegistroCasos> novaLista = new ArrayList<>();
         for (RegistroCasos registroCasos : this.getDados()) {
@@ -144,7 +143,6 @@ public class RegistrosCasosRepository implements Serializable {
         try (FileOutputStream fos = new FileOutputStream("./src/ruraldevs/data/caso_full.csv.gz");) {
             website = new URL("https://data.brasil.io/dataset/covid19/caso_full.csv.gz");
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            System.out.println("Baixando arquivo");
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -170,7 +168,6 @@ public class RegistrosCasosRepository implements Serializable {
             while ((bytes_read = gZIPInputStream.read(buffer)) > 0) {
                 fileOutputStream.write(buffer, 0, bytes_read);
             }
-            System.out.println("The file was decompressed successfully!");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -184,7 +181,7 @@ public class RegistrosCasosRepository implements Serializable {
     }
 
     public boolean checarAtualizacoes() {
-        boolean haAtualização = true;
+        boolean haAtualizacao = true;
         URL url;
         try {
             StringBuilder result = new StringBuilder();
@@ -200,7 +197,7 @@ public class RegistrosCasosRepository implements Serializable {
                 Object object = ois.readObject();
                 String storedSHA512 = (String) object;
                 if (SHA512Atual.equals(storedSHA512)) {
-                    haAtualização = false;
+                    haAtualizacao = false;
                 }
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -214,12 +211,13 @@ public class RegistrosCasosRepository implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return haAtualização;
+        return haAtualizacao;
     }
 
-    public void atualizarDados() {
+    private void atualizarDados() {
         baixarArquivo();
         extrairArquivo();
         lerDoArquivo();
     }
+
 }

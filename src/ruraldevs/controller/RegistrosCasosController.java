@@ -14,11 +14,11 @@ public class RegistrosCasosController {
         this.service = new RegistrosCasosService();
     }
 
-    public void addEstado(RegistroCasos registroCasos) {
+    public void addRegistroCasos(RegistroCasos registroCasos) {
         this.service.addRegistroCasos(registroCasos);
     }
 
-    public List<RegistroCasos> getEstados() {
+    public List<RegistroCasos> getRegistroCasos() {
         return this.service.getRegistrosCasos();
     }
 
@@ -26,7 +26,8 @@ public class RegistrosCasosController {
         this.service.deleteRegistroCasos(registroCasos);
     }
 
-    public void updateEstado(RegistroCasos registroCasos) {
+
+    public void updateRegistroCasos(RegistroCasos registroCasos) {
         this.service.updateRegistroCasos(registroCasos);
     }
 
@@ -38,8 +39,12 @@ public class RegistrosCasosController {
         return this.service.checarAtualizacoes();
     }
 
-    public void atualizarDados() {
-        this.service.atualizarDados();
+    public void baixarArquivo() {
+        this.service.baixarArquivo();
+    }
+
+    public void extrairArquivo() {
+        this.service.extrairArquivo();
     }
 }
 

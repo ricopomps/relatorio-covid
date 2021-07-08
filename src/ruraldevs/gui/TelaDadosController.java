@@ -7,13 +7,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +46,7 @@ public class TelaDadosController implements Initializable {
 	@FXML
 	private BorderPane paneBorderPane;
 	@FXML
-	private ComboBox<EstadosEnum> comboBEstados;
+	private ComboBox<String> comboBEstados;
 	@FXML
 	private ComboBox<String> comboBCidades;
 	@FXML
@@ -86,6 +89,7 @@ public class TelaDadosController implements Initializable {
 
 	@FXML
 	public void calcularPeriodo() {
+		btnCarregar.setDisable(false);
 		switch (comboBPeriodo.getValue()) {
 			case "1 Semana":
 				dataFinal = LocalDate.now();
@@ -128,15 +132,29 @@ public class TelaDadosController implements Initializable {
 
 	@FXML
 	public void carregarGraficos() {
+		btnCarregar.setDisable(true);
 		try {
 			novosCasosSeries.getData().clear();
 			totalCasosSeries.getData().clear();
 			novasMortesSeries.getData().clear();
 			totalMortesSeries.getData().clear();
 
+			if (chartNovosCasos.getData().size() == 0) {
+				chartNovosCasos.getData().add(novosCasosSeries);
+			}
+			if (chartTotalCasos.getData().size() == 0) {
+				chartTotalCasos.getData().add(totalCasosSeries);
+			}
+			if (chartNovasMortes.getData().size() == 0) {
+				chartNovasMortes.getData().add(novasMortesSeries);
+			}
+			if (chartTotalMortes.getData().size() == 0) {
+				chartTotalMortes.getData().add(totalMortesSeries);
+			}
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
-			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
+			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue(), comboBCidades.getValue(), dataInicial, dataFinal);
 
 			for (RegistroCasos registroCasos : listaRegistrosCasos) {
 				novosCasosSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovosCasos()));
@@ -210,7 +228,35 @@ public class TelaDadosController implements Initializable {
 			alert.getDialogPane().setContentText("Há uma nova atualização dos dados, deseja baixar?");
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == sim) {
-				MainTelas.registrosCasosController.atualizarDados();
+				Task<Void> baixarTask = new Task<Void>() {
+					@Override
+					public Void call() {
+						MainTelas.registrosCasosController.baixarArquivo();
+						return null;
+					}
+				};
+				Task<Void> extrairTask = new Task<Void>() {
+					@Override
+					public Void call() {
+						MainTelas.registrosCasosController.extrairArquivo();
+						return null;
+					}
+				};
+				extrairTask.setOnSucceeded(e -> {
+					Alert atualizadoAlert = new Alert(AlertType.INFORMATION, "");
+
+					atualizadoAlert.initModality(Modality.APPLICATION_MODAL);
+					atualizadoAlert.initOwner(stage);
+
+					atualizadoAlert.getDialogPane().setHeaderText("Dados atualizados!");
+					atualizadoAlert.getDialogPane().setContentText("Os dados foram atualizados, reinicie o programa para carrega-los.");
+
+					atualizadoAlert.showAndWait();
+				});
+				baixarTask.setOnSucceeded(e -> {
+					new Thread(extrairTask).start();
+				});
+				new Thread(baixarTask).start();
 			}
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION, "", ButtonType.OK);
@@ -234,10 +280,19 @@ public class TelaDadosController implements Initializable {
 
 	@FXML
 	public void preencherCidades(ActionEvent event) {
-		EstadosEnum estado = comboBEstados.getValue();
-		if (estado.equals("Brasil")) {
+		btnCarregar.setDisable(false);
+		EstadosEnum estado = EstadosEnum.PE;
+		if (comboBEstados.getValue().equals("Brasil")) {
 			return;
 		}
+
+		for (EstadosEnum estadoE : EstadosEnum.values()) {
+			if (estadoE.getNomeEstado().equals(comboBEstados.getValue())) {
+				estado = estadoE;
+				break;
+			}
+		}
+
 		comboBCidades.getItems().clear();
 		comboBCidades.setDisable(false);
 		comboBCidades.getItems().add(null);
@@ -262,18 +317,27 @@ public class TelaDadosController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		comboBEstados.setPromptText("Estado");
+		comboBEstados.getItems().add("Brasil");
+		comboBEstados.getItems().addAll(Arrays.stream(EstadosEnum.values()).map(e -> e.getNomeEstado()).collect(Collectors.toList()));
+
+		comboBCidades.setOnAction(e -> {
+			btnCarregar.setDisable(false);
+		});
 		comboBCidades.getItems().add("Escolha um estado");
 		comboBCidades.setValue("Escolha um estado");
 		comboBCidades.setDisable(true);
-		// comboBEstados.getItems().add("Brasil");
+
 		String[] opcoesPeriodo = {"1 Semana", "2 Semanas", "1 mês", "Todo período", "Personalizado"};
 		comboBPeriodo.getItems().addAll(opcoesPeriodo);
 		comboBPeriodo.setValue("1 Semana");
-		comboBEstados.getItems().addAll(EstadosEnum.values());
+
+		btnCarregar.setDisable(true);
+
 		novosCasosSeries.setName("Número de casos");
 		totalCasosSeries.setName("Número total de casos");
 		novasMortesSeries.setName("Número de mortes");
 		totalMortesSeries.setName("Número total de mortes");
+
 		chartNovosCasos.getData().add(novosCasosSeries);
 		chartTotalCasos.getData().add(totalCasosSeries);
 		chartNovasMortes.getData().add(novasMortesSeries);

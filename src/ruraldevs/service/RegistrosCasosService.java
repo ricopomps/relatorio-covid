@@ -53,7 +53,12 @@ public class RegistrosCasosService {
         return this.repositorio.checarAtualizacoes();
     }
 
-    public void atualizarDados() {
-        this.repositorio.atualizarDados();
+    public void baixarArquivo() {
+        this.repositorio.baixarArquivo();
     }
+
+    public void extrairArquivo() {
+        this.repositorio.extrairArquivo();
+    }
+
 }
