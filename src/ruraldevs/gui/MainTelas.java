@@ -27,6 +27,9 @@ public class MainTelas extends Application {
 	private static Scene statusScene;
 	private static Scene dadosScene;
 	private static Parent fxmlStatus;
+	private static Parent fxmlCadas;
+	private static Parent fxmlAgenda;
+	private static Parent fxmlTelaDados;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -34,15 +37,6 @@ public class MainTelas extends Application {
 
 		Parent fxmlMain = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/sample.fxml"));
 		mainScene = new Scene(fxmlMain);
-
-		Parent fxmlCadas = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/cadassample.fxml"));
-		cadasScene = new Scene(fxmlCadas);
-
-		Parent fxmlAgenda = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/agendasample.fxml"));
-		agendaScene = new Scene(fxmlAgenda);
-
-		Parent fxmlTelaDados = FXMLLoader.load(getClass().getResource("/ruraldevs/gui/fxml/telaDados.fxml"));
-		dadosScene = new Scene(fxmlTelaDados);
 
 		primaryStage.setScene(mainScene);
 
@@ -53,31 +47,42 @@ public class MainTelas extends Application {
 	}
 
 	public static void changeScreen(String scr) {
-		switch (scr) {
+		try {
+			switch (scr) {
 			case "main":
 				stg.setScene(mainScene);
 				break;
 			case "cadas":
+				Parent fxmlCadas;
+				fxmlCadas = FXMLLoader.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/cadassample.fxml"));
+
+				cadasScene = new Scene(fxmlCadas);
 				stg.setScene(cadasScene);
 				break;
 			case "agenda":
+				Parent fxmlAgenda = FXMLLoader
+						.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/agendasample.fxml"));
+				agendaScene = new Scene(fxmlAgenda);
 				stg.setScene(agendaScene);
 				break;
 			case "status":
-				try {
-					fxmlStatus = FXMLLoader.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/statussample.fxml"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				fxmlStatus = FXMLLoader.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/statussample.fxml"));
 				statusScene = new Scene(fxmlStatus);
 				stg.setScene(statusScene);
 				break;
 			case "dados":
+				Parent fxmlTelaDados = FXMLLoader
+						.load(MainTelas.class.getResource("/ruraldevs/gui/fxml/telaDados.fxml"));
+				dadosScene = new Scene(fxmlTelaDados);
 				stg.setScene(dadosScene);
 				break;
 			default:
 				stg.setScene(mainScene);
 				break;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
