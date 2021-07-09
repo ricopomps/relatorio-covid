@@ -64,13 +64,23 @@ public class AgendaController implements Initializable {
 
     @FXML
     public void voltarpressed(ActionEvent event) {
-        cidadeselect.setValue(null);
-        ceptext.clear();
-        dtVac.setValue(null);
-        gruposelect.setValue(null);
-        ufselect.setValue(null);
-
-        MainTelas.changeScreen("main");
+       	  Alert alert = new Alert(AlertType.CONFIRMATION);
+  	alert.setTitle("Deseja sair? ");
+  	alert.setHeaderText("Deseja voltar para tela inicial?");
+  	alert.setContentText("Sair irá interromper o processo de agendamento, sua conta ja foi registrada com sucesso"); 	 
+  	alert.showAndWait().ifPresent(response -> {
+  	     if (response == ButtonType.OK) {
+  	    	 mainTelas.changeScreen("main");
+  	    	 ufselect.getItems().add(null);
+  		    cidadeselect.setValue(null);
+  		    ceptext.clear();
+  			dtVac.setValue(null);
+  			gruposelect.setValue(null);
+  			ufselect.setValue(null);
+  			centros.setValue(null);
+  	     }
+  	 });
+	  
     }
 
     public static void cepField(TextField textField) {
