@@ -82,6 +82,15 @@ public class StatusController implements Initializable {
   }
 
   public void dadosbttnpressed(ActionEvent event) {
-    MainTelas.changeScreen("dados");
-  }
+   Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Logout ");
+		alert.setHeaderText("Deseja voltar para as estatisticas?");
+		alert.setContentText("Sair irá deslogar sua conta, seu agendamento ja foi realizado com sucesso");
+		alert.showAndWait().ifPresent(response -> {
+			if (response == ButtonType.OK) {
+				mainTelas.changeScreen("dados");
+
+			}
+		});
+  
 }
