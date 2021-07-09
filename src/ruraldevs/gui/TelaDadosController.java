@@ -7,11 +7,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -46,7 +44,7 @@ public class TelaDadosController implements Initializable {
 	@FXML
 	private BorderPane paneBorderPane;
 	@FXML
-	private ComboBox<String> comboBEstados;
+	private ComboBox<EstadosEnum> comboBEstados;
 	@FXML
 	private ComboBox<String> comboBCidades;
 	@FXML
@@ -154,7 +152,7 @@ public class TelaDadosController implements Initializable {
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YY");
 
-			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue(), comboBCidades.getValue(), dataInicial, dataFinal);
+			List<RegistroCasos> listaRegistrosCasos = MainTelas.registrosCasosController.filtrar(comboBEstados.getValue().getNomeEstado(), comboBCidades.getValue(), dataInicial, dataFinal);
 
 			for (RegistroCasos registroCasos : listaRegistrosCasos) {
 				novosCasosSeries.getData().add(new XYChart.Data<String, Number>(formatter.format(registroCasos.getData()), registroCasos.getNumeroDeNovosCasos()));
@@ -282,18 +280,8 @@ public class TelaDadosController implements Initializable {
 	public void preencherCidades(ActionEvent event) {
 		btnCarregar.setDisable(false);
 		EstadosEnum estado = EstadosEnum.PE;
-		if (comboBEstados.getValue().equals("Brasil")) {
-			return;
-		}
-
-		for (EstadosEnum estadoE : EstadosEnum.values()) {
-			if (estadoE.getNomeEstado().equals(comboBEstados.getValue())) {
-				estado = estadoE;
-				break;
-			}
-		}
-
 		comboBCidades.getItems().clear();
+
 		comboBCidades.setDisable(false);
 		comboBCidades.getItems().add(null);
 		JSONParser parser = new JSONParser();
@@ -317,8 +305,7 @@ public class TelaDadosController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		comboBEstados.setPromptText("Estado");
-		comboBEstados.getItems().add("Brasil");
-		comboBEstados.getItems().addAll(Arrays.stream(EstadosEnum.values()).map(e -> e.getNomeEstado()).collect(Collectors.toList()));
+		comboBEstados.getItems().addAll(EstadosEnum.values());
 
 		comboBCidades.setOnAction(e -> {
 			btnCarregar.setDisable(false);
