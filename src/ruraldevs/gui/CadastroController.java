@@ -96,7 +96,7 @@ public class CadastroController implements Initializable {
 			MainTelas.changeScreen("agenda");
 		} catch (Exception e) {
 			alert.showAndWait();
-			alert.showAndWait();
+			return;
 		}
     }
 }

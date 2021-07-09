@@ -52,25 +52,15 @@ public class LoginController {
 					}
 
 					for (RegistroVacina registro : MainTelas.registroController.getRegistrosVacinas()) {
-						// System.out.println("aa");
-						for (RegistroVacina registro2 : MainTelas.registroController.getRegistrosVacinas()) {
-							if (pessoa.equals(registro2.getPessoa())) {
-								System.out.println(registro2);
-							}
-							
-						}
-						
 						if (pessoa.equals(registro.getPessoa())) {
 							if (registro.getDataDaVacina().isAfter(LocalDate.now())) {
 								MainTelas.registroVacinaLogado = registro;
-								// System.out.println("foi");
 								MainTelas.changeScreen("status");
 								return true;
 							}
 						}
 					}
 					MainTelas.changeScreen("agenda");
-					// System.out.println("n foi");
 					return true;
 				}
 			}
