@@ -102,8 +102,7 @@ public class CadastroController implements Initializable {
 			alert1.initModality(Modality.WINDOW_MODAL);
 			alert1.showAndWait();
 			return;
-			alerta1.showAndWait();
-			return;
+			
 		}
     }
 }
