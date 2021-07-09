@@ -28,6 +28,8 @@ public class LoginController {
 	@FXML
 	public void bttnLoginPressed(ActionEvent event) {
 		if (login(login.getText(), senha.getText())) {
+			login.clear();
+			senha.clear();
 			return;
 		}
 		Alert alert = new Alert(AlertType.WARNING);
@@ -41,10 +43,7 @@ public class LoginController {
 		for (Pessoa pessoa : MainTelas.pessoaController.getPessoas()) {
 			if (pessoa.getCpf().equals(cpf)) {
 				if (pessoa.getSenha().equals(senha)) {
-					System.out.println("entrou");
 					MainTelas.pessoaLogada = pessoa;
-					System.out.println(MainTelas.registroController.getRegistrosVacinas());
-					System.out.println(MainTelas.pessoaController.getPessoas());
 
 					if (MainTelas.registroController.getRegistrosVacinas().size() == 0) {
 						MainTelas.changeScreen("agenda");

@@ -95,8 +95,14 @@ public class CadastroController implements Initializable {
 			datanasc.setValue(null);
 			MainTelas.changeScreen("agenda");
 		} catch (Exception e) {
-			alert.showAndWait();
+			Alert alert1 = new Alert(AlertType.WARNING);
+			alert1.setTitle("Erro de cadastro");
+			alert1.setHeaderText("CPF já cadastrado");
+			alert1.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
+			alert1.initModality(Modality.WINDOW_MODAL);
+			alert1.showAndWait();
 			return;
+			
 		}
     }
 }
