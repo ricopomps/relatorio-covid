@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -70,7 +71,7 @@ public class AgendaController implements Initializable {
   	alert.setContentText("Sair irá interromper o processo de agendamento, sua conta ja foi registrada com sucesso"); 	 
   	alert.showAndWait().ifPresent(response -> {
   	     if (response == ButtonType.OK) {
-  	    	 mainTelas.changeScreen("main");
+  	    	 MainTelas.changeScreen("main");
   	    	 ufselect.getItems().add(null);
   		    cidadeselect.setValue(null);
   		    ceptext.clear();
@@ -233,9 +234,9 @@ public class AgendaController implements Initializable {
         RegistroVacina cadastro = new RegistroVacina(MainTelas.pessoaLogada, Vac, dtVac.getValue(), LocalVac, gruposelect.getValue());
         RegistroVacina cadastro2dose = new RegistroVacina(MainTelas.pessoaLogada, Vac, (LocalDate) dtVac.getValue().plusDays(90), LocalVac, gruposelect.getValue());
         if (dtVac.getValue().isBefore(LocalDate.now()) || dtVac.getValue().isEqual(LocalDate.now())) {
-            MainTelas.registroVacinaLogado = cadastro;
-        } else {
             MainTelas.registroVacinaLogado = cadastro2dose;
+        } else {
+            MainTelas.registroVacinaLogado = cadastro;
         }
         cadastro.setDose(1);
         cadastro2dose.setDose(2);
@@ -243,7 +244,6 @@ public class AgendaController implements Initializable {
         MainTelas.registroController.addRegistroVacina(cadastro2dose);
         MainTelas.registroController.salvarArquivo();
         MainTelas.pessoaController.salvar();
-
         MainTelas.changeScreen("status");
         System.out.println(cadastro);
     }
