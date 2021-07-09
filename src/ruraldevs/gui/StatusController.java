@@ -66,7 +66,15 @@ public class StatusController implements Initializable {
     
       public void logoutbutton(ActionEvent event) {
 	  
-	  
+	  Alert alert = new Alert(AlertType.CONFIRMATION);
+	  	alert.setTitle("Logout ");
+	  	alert.setHeaderText("Deseja voltar para tela inicial?");
+	  	alert.setContentText("Sair irá deslogar sua conta, seu agendamento ja foi realizado com sucesso"); 	 
+	  	alert.showAndWait().ifPresent(response -> {
+	  	     if (response == ButtonType.OK) {
+	  	    	 mainTelas.changeScreen("main");
+	  	    	
+	  	     }});
 	  
 	  
   }	
