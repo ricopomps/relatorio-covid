@@ -22,7 +22,7 @@ public class RegistroVacinaRepository extends GenericRepository<RegistroVacina> 
 		return instance;
 	}
 
-	public void addRegistro(RegistroVacina registro) {
+	public void addRegistro(RegistroVacina registro) throws Exception {
 		this.addDado(registro);
 		lerDoArquivo();
 	}

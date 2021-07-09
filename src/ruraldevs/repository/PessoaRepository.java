@@ -22,7 +22,7 @@ public class PessoaRepository extends GenericRepository<Pessoa> {
 		return instance;
 	}
 
-	public void addPessoa(Pessoa pessoa) {
+	public void addPessoa(Pessoa pessoa) throws Exception {
 		this.addDado(pessoa);
 		lerDoArquivo();
 	}

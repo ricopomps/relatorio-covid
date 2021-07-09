@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
@@ -39,7 +40,7 @@ public class CadastroController implements Initializable {
 	  	alert.setContentText("Sair irá interromper o processo de cadastro"); 	 
 	  	alert.showAndWait().ifPresent(response -> {
 	  	     if (response == ButtonType.OK) {
-	  	    	 mainTelas.changeScreen("main");
+	  	    	 MainTelas.changeScreen("main");
 	  	       cxnome.clear();
 	  	       cxcpf.clear();
 	  	       cxsenha.clear();
@@ -82,15 +83,20 @@ public class CadastroController implements Initializable {
         }
 
         Pessoa nome = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
-        MainTelas.pessoaController.addPessoa(nome);
-        MainTelas.pessoaController.salvar();
-        MainTelas.pessoaLogada = nome;
-        System.out.println(MainTelas.pessoaController.getPessoas());
-
-        cxnome.clear();
-        cxcpf.clear();
-        cxsenha.clear();
-        datanasc.setValue(null);
-        MainTelas.changeScreen("agenda");
+        try {
+			MainTelas.pessoaController.addPessoa(nome);
+			MainTelas.pessoaController.salvar();
+			MainTelas.pessoaLogada = nome;
+			System.out.println(MainTelas.pessoaController.getPessoas());
+			
+			cxnome.clear();
+			cxcpf.clear();
+			cxsenha.clear();
+			datanasc.setValue(null);
+			MainTelas.changeScreen("agenda");
+		} catch (Exception e) {
+			alert.showAndWait();
+			alert.showAndWait();
+		}
     }
 }

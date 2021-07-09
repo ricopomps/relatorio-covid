@@ -16,9 +16,11 @@ public abstract class GenericRepository<T> implements Serializable {
 		return dados;
 	}
 
-	public void addDado(T dado) {
+	public void addDado(T dado) throws Exception {
 		if (!this.dados.contains(dado)) {
 			this.dados.add(dado);
+		} else {
+			throw new Exception();
 		}
 	}
 

@@ -11,7 +11,7 @@ public class VacinaController {
 		this.service = new VacinaService();
 	}
 
-	public void addVacina(Vacina vacina) {
+	public void addVacina(Vacina vacina) throws Exception {
 		this.service.addVacina(vacina);
 	}
 

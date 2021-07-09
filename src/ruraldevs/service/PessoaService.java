@@ -11,7 +11,7 @@ public class PessoaService {
 		this.repositorio = PessoaRepository.getInstance();
 	}
 
-	public void addPessoa(Pessoa pessoa) {
+	public void addPessoa(Pessoa pessoa) throws Exception {
 		this.repositorio.addDado(pessoa);
 	}
 

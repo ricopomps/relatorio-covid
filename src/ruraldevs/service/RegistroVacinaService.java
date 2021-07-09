@@ -11,7 +11,7 @@ public class RegistroVacinaService {
 		this.repositorio = RegistroVacinaRepository.getInstance();
 	}
 
-	public void addRegistroVacina(RegistroVacina registroVacina) {
+	public void addRegistroVacina(RegistroVacina registroVacina) throws Exception {
 		this.repositorio.addDado(registroVacina);
 	}
 

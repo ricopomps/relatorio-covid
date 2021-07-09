@@ -11,7 +11,7 @@ public class RegistroVacinaController {
 		this.service = new RegistroVacinaService();
 	}
 
-	public void addRegistroVacina(RegistroVacina registroVacina) {
+	public void addRegistroVacina(RegistroVacina registroVacina) throws Exception {
 		this.service.addRegistroVacina(registroVacina);
 	}
 

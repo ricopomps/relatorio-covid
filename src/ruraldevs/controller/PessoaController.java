@@ -11,7 +11,7 @@ public class PessoaController {
 		this.service = new PessoaService();
 	}
 
-	public void addPessoa(Pessoa pessoa) {
+	public void addPessoa(Pessoa pessoa) throws Exception {
 		this.service.addPessoa(pessoa);
 	}
 
