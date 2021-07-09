@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 import ruraldevs.beans.EstadosEnum;
 import ruraldevs.beans.RegistroCasos;
@@ -85,21 +86,14 @@ public class RegistrosCasosRepository implements Serializable {
                 } else {
                     isState = false;
                 }
-                boolean isRepeated;
-                if (dados[7].equals("true")) {
-                    isRepeated = true;
-                } else {
-                    isRepeated = false;
-                }
                 long numeroDeNovosCasos = Long.parseLong(dados[16]);
                 long numeroTotalDeCasos = Long.parseLong(dados[8]);
                 long numeroDeNovasMortes = Long.parseLong(dados[17]);
                 long numeroTotalDeMortes = Long.parseLong(dados[12]);
-                boolean isLast = Boolean.parseBoolean(dados[6].toLowerCase());
                 if (cidade.equals("")) {
-                    instance.addDado(new RegistroCasos(estado, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes, isLast, isRepeated));
+                    instance.addDado(new RegistroCasos(estado, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes));
                 } else {
-                    instance.addDado(new RegistroCasos(estado, cidade, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes, isLast, isRepeated));
+                    instance.addDado(new RegistroCasos(estado, cidade, data, ultimaData, isState, numeroDeNovosCasos, numeroTotalDeCasos, numeroDeNovasMortes, numeroTotalDeMortes));
                 }
                 line = br.readLine();
             }
@@ -111,13 +105,9 @@ public class RegistrosCasosRepository implements Serializable {
     }
 
     public List<RegistroCasos> filtrarPorEstado(EstadosEnum estado, LocalDate dataInicial, LocalDate dataFinal) throws DadosNaoEncontradosException {
-        List<RegistroCasos> novaLista = new ArrayList<>();
-        for (RegistroCasos registroCasos : this.getDados()) {
-            if (registroCasos.isIsState() && registroCasos.getEstado().equals(estado) && (registroCasos.getData().isEqual(dataInicial) || registroCasos.getData().isAfter(dataInicial))
-                    && (registroCasos.getData().isEqual(dataFinal) || registroCasos.getData().isBefore(dataFinal))) {
-                novaLista.add(registroCasos);
-            }
-        }
+        List<RegistroCasos> novaLista = this.getDados().stream().filter(registroCasos -> registroCasos.isState() && registroCasos.getEstado().equals(estado)
+                && (registroCasos.getData().isEqual(dataInicial) || registroCasos.getData().isAfter(dataInicial)) && (registroCasos.getData().isEqual(dataFinal) || registroCasos.getData().isBefore(dataFinal))).collect(Collectors.toList());
+
         if (novaLista.size() == 0) {
             throw new DadosNaoEncontradosException(dataInicial, dataFinal, estado);
         }
@@ -125,13 +115,11 @@ public class RegistrosCasosRepository implements Serializable {
     }
 
     public List<RegistroCasos> filtrarPorCidade(EstadosEnum estado, String cidade, LocalDate dataInicial, LocalDate dataFinal) throws DadosNaoEncontradosException {
-        List<RegistroCasos> novaLista = new ArrayList<>();
-        for (RegistroCasos registroCasos : this.getDados()) {
-            if (!registroCasos.isIsState() && registroCasos.getEstado().equals(estado) && registroCasos.getCidade().equals(cidade) && (registroCasos.getData().isEqual(dataInicial) || registroCasos.getData().isAfter(dataInicial))
-                    && (registroCasos.getData().isEqual(dataFinal) || registroCasos.getData().isBefore(dataFinal))) {
-                novaLista.add(registroCasos);
-            }
-        }
+        List<RegistroCasos> novaLista =
+                this.getDados().stream()
+                        .filter(registroCasos -> !registroCasos.isState() && registroCasos.getEstado().equals(estado) && registroCasos.getCidade().equals(cidade)
+                                && (registroCasos.getData().isEqual(dataInicial) || registroCasos.getData().isAfter(dataInicial)) && (registroCasos.getData().isEqual(dataFinal) || registroCasos.getData().isBefore(dataFinal)))
+                        .collect(Collectors.toList());
         if (novaLista.size() == 0) {
             throw new DadosNaoEncontradosException(dataInicial, dataFinal, estado, cidade);
         }

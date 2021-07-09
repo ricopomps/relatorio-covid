@@ -25,3 +25,7 @@ hs_err_pid*
 # Vscode
 .vscode/
 /bin/
+
+# Dados
+*.dat
+*.csv

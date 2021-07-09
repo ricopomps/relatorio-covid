@@ -9,16 +9,13 @@ public class RegistroCasos implements Serializable {
     private String cidade;
     private LocalDate ultimaData;
     private LocalDate data;
-    private boolean isLast;
     private boolean isState;
-    private boolean isRepeated;
     private long numeroDeNovosCasos;
     private long numeroTotalDeCasos;
     private long numeroDeNovasMortes;
     private long numeroTotalDeMortes;
 
-    public RegistroCasos(EstadosEnum estado, String cidade, LocalDate data, LocalDate ultimaData, boolean isState, long numeroDeNovosCasos, long numeroTotalDeCasos, long numeroDeNovasMortes, long numeroTotalDeMortes, boolean isLast,
-            boolean isRepeated) {
+    public RegistroCasos(EstadosEnum estado, String cidade, LocalDate data, LocalDate ultimaData, boolean isState, long numeroDeNovosCasos, long numeroTotalDeCasos, long numeroDeNovasMortes, long numeroTotalDeMortes) {
         setEstado(estado);
         setCidade(cidade);
         setData(data);
@@ -28,11 +25,9 @@ public class RegistroCasos implements Serializable {
         setNumeroTotalDeCasos(numeroTotalDeCasos);
         setNumeroDeNovasMortes(numeroDeNovasMortes);
         setNumeroTotalDeMortes(numeroTotalDeMortes);
-        setIsLast(isLast);
-        setIsRepeated(isRepeated);
     }
 
-    public RegistroCasos(EstadosEnum estado, LocalDate data, LocalDate ultimaData, boolean isState, long numeroDeNovosCasos, long numeroTotalDeCasos, long numeroDeNovasMortes, long numeroTotalDeMortes, boolean isLast, boolean isRepeated) {
+    public RegistroCasos(EstadosEnum estado, LocalDate data, LocalDate ultimaData, boolean isState, long numeroDeNovosCasos, long numeroTotalDeCasos, long numeroDeNovasMortes, long numeroTotalDeMortes) {
         setEstado(estado);
         setData(data);
         setUltimaData(ultimaData);
@@ -41,23 +36,15 @@ public class RegistroCasos implements Serializable {
         setNumeroTotalDeCasos(numeroTotalDeCasos);
         setNumeroDeNovasMortes(numeroDeNovasMortes);
         setNumeroTotalDeMortes(numeroTotalDeMortes);
-        setIsLast(isLast);
-        setIsRepeated(isRepeated);
     }
 
     @Override
     public String toString() {
-        String simOuNao;
-        if (isLast) {
-            simOuNao = "Sim";
-        } else {
-            simOuNao = "Não";
-        }
         if (isState) {
-            return String.format("[%s] - Ultima informção? [%s] [%s] - Estado: %s, Novos casos: %d, Total de casos: %d, Novas Mortes: %d, Total de Mortes: %d", DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.data), simOuNao,
+            return String.format("[%s] - Ultima informção? [%s] - Estado: %s, Novos casos: %d, Total de casos: %d, Novas Mortes: %d, Total de Mortes: %d", DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.data),
                     DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.ultimaData), this.estado.getNomeEstado(), this.numeroDeNovosCasos, this.numeroTotalDeCasos, this.numeroDeNovasMortes, this.numeroTotalDeMortes);
         }
-        return String.format("[%s] - Ultima informção? [%s] [%s] - Estado: %s, Cidade: %s, Novos casos: %d, Total de casos: %d, Novas Mortes: %d, Total de Mortes: %d", DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.data), simOuNao,
+        return String.format("[%s] - Ultima informção? [%s] - Estado: %s, Cidade: %s, Novos casos: %d, Total de casos: %d, Novas Mortes: %d, Total de Mortes: %d", DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.data),
                 DateTimeFormatter.ofPattern("dd/MM/YYYY").format(this.ultimaData), this.estado.getNomeEstado(), this.cidade, this.numeroDeNovosCasos, this.numeroTotalDeCasos, this.numeroDeNovasMortes, this.numeroTotalDeMortes);
     }
 
@@ -77,7 +64,7 @@ public class RegistroCasos implements Serializable {
         this.numeroTotalDeCasos = numeroTotalDeCasos;
     }
 
-    public boolean isIsState() {
+    public boolean isState() {
         return isState;
     }
 
@@ -131,21 +118,5 @@ public class RegistroCasos implements Serializable {
 
     public void setUltimaData(LocalDate ultimaData) {
         this.ultimaData = ultimaData;
-    }
-
-    public boolean isIsLast() {
-        return isLast;
-    }
-
-    public void setIsLast(boolean isLast) {
-        this.isLast = isLast;
-    }
-
-    public boolean isIsRepeated() {
-        return isRepeated;
-    }
-
-    public void setIsRepeated(boolean isRepeated) {
-        this.isRepeated = isRepeated;
     }
 }
