@@ -51,7 +51,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="grupolabel" layoutX="114.0" layoutY="434.0" text="grupo" textFill="WHITE">
+            <Label fx:id="grupolabel" layoutX="116.0" layoutY="418.0" maxWidth="-Infinity" prefHeight="72.0" prefWidth="388.0" text="grupo" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
@@ -67,9 +67,9 @@
                </font>
             </Label>
             <Button layoutX="1212.0" layoutY="528.0" mnemonicParsing="false" onAction="#dadosbttnpressed" text="Estatisticas" />
-            <Hyperlink layoutX="1286.0" layoutY="47.0" onAction="#logoutbutton" textFill="WHITE">
+            <Hyperlink layoutX="1292.0" layoutY="23.0" onAction="#logoutbutton" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="19.0">
+                  <ImageView fitHeight="29.0" fitWidth="29.0">
                      <image>
                         <Image url="@../assets/logout.png" />
                      </image>
