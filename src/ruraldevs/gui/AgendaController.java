@@ -173,7 +173,7 @@ public class AgendaController implements Initializable {
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
 
-                if (/*item.isBefore(LocalDate.now().plusDays(1)) ||*/ item.isAfter(LocalDate.now().plusMonths(4))) {
+                if (item.isBefore(LocalDate.now().plusDays(1)) || item.isAfter(LocalDate.now().plusMonths(4))) {
                     setStyle("-fx-background-color: #EBEBEB; -fx-text-fill: darkgray;");
                     setDisable(true);
                 }
@@ -245,6 +245,5 @@ public class AgendaController implements Initializable {
         MainTelas.registroController.salvarArquivo();
         MainTelas.pessoaController.salvar();
         MainTelas.changeScreen("status");
-        System.out.println(cadastro);
     }
 }
