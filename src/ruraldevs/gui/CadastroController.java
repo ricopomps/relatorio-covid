@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.util.Callback;
 import ruraldevs.beans.Pessoa;
 
@@ -73,7 +74,7 @@ public class CadastroController implements Initializable {
 
         try {
             if (cxnome.getText().isEmpty() || cxcpf.getText().isEmpty() || datanasc.getValue().equals(null) || cxsenha.getText().isEmpty()) {
-                System.out.println("preencha todos os dados");
+
                 alert.showAndWait();
                 return;
             }
@@ -84,25 +85,23 @@ public class CadastroController implements Initializable {
 
         Pessoa nome = new Pessoa(cxnome.getText(), cxcpf.getText(), datanasc.getValue(), cxsenha.getText());
         try {
-			MainTelas.pessoaController.addPessoa(nome);
-			MainTelas.pessoaController.salvar();
-			MainTelas.pessoaLogada = nome;
-			System.out.println(MainTelas.pessoaController.getPessoas());
-			
-			cxnome.clear();
-			cxcpf.clear();
-			cxsenha.clear();
-			datanasc.setValue(null);
-			MainTelas.changeScreen("agenda");
-		} catch (Exception e) {
-			Alert alert1 = new Alert(AlertType.WARNING);
-			alert1.setTitle("Erro de cadastro");
-			alert1.setHeaderText("CPF já cadastrado");
-			alert1.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
-			alert1.initModality(Modality.WINDOW_MODAL);
-			alert1.showAndWait();
-			return;
-			
-		}
+            MainTelas.pessoaController.addPessoa(nome);
+            MainTelas.pessoaController.salvar();
+            MainTelas.pessoaLogada = nome;
+
+            cxnome.clear();
+            cxcpf.clear();
+            cxsenha.clear();
+            datanasc.setValue(null);
+            MainTelas.changeScreen("agenda");
+        } catch (Exception e) {
+            Alert alert1 = new Alert(AlertType.WARNING);
+            alert1.setTitle("Erro de cadastro");
+            alert1.setHeaderText("CPF já cadastrado");
+            alert1.setContentText("Por favor, preencha os campos novamente com as informações corretas.");
+            alert1.initModality(Modality.WINDOW_MODAL);
+            alert1.showAndWait();
+            return;
+        }
     }
 }
